@@ -294,10 +294,10 @@ export async function createBlog(data: CreateBlogDto): Promise<Blog> {
     "test": "turbo run test",
     "lint": "turbo run lint",
     
-    "db:migrate": "cd apps/api && npm run migration:run",
-    "db:generate": "cd apps/api && npm run prisma:generate",
+    "db:migrate": "npm run migration:run --prefix apps/api",
+    "db:generate": "npm run prisma:generate --prefix apps/api",
     
-    "clean": "turbo run clean && rm -rf node_modules",
+    "clean": "turbo run clean && rimraf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "devDependencies": {

@@ -68,6 +68,13 @@ updateDigest(path, { lastModifiedBy: 'AI', viewedAt: now() })
 2. **Language Selection**:
    - Detect project stack (Node.js, Java, Python, Go)
    - OR check `user.preferences.language`
+### 4. ⚔️ Sovereign Security Protocols
+- **RLS Gendarme**:
+    - **Mandate**: Security MUST exist at the data bucket level, not just the application level.
+    - **Implementation**: Auto-generate Database Policies (Postgres RLS) or Edge Middleware (`middleware.ts`) to physically block unauthorized access.
+- **API Fuzzer**:
+    - **Mandate**: Resilience beyond the "Happy Path".
+    - **Implementation**: Integrate a Fuzz Testing step in the CD pipeline to bombard endpoints with malformed payloads, ensuring graceful failure (400 Bad Request) instead of crashes (500 Error).
 3. **Blueprint**: Match templates from `_meta.json` based on `language`
 4. **Implementation Strategy**:
    - **TypeScript**: Prisma 5-Step (schema → db push → generate → tsc)

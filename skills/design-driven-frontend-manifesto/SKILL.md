@@ -149,6 +149,17 @@ Enterprise-grade UI resources:
 
 ---
 
+### 3. 🛡️ Sovereign Resilience Protocols
+- **Self-Healing Assets**:
+    - **Rule**: Never reference a static asset (img/video) that doesn't exist.
+    - **Action**: If a file is missing, *automatically* generate a lightweight SVG placeholder or fetch a stock resource before rendering.
+    - **Outcome**: Zero "Red Box" 404 errors in the UI.
+- **Config Supervisor**:
+    - **Rule**: Detect the exact version of the styling engine (e.g., Tailwind v4).
+    - **Action**: Enforce the correct configuration strategy (e.g., CSS Variables in `globals.css` vs `tailwind.config.ts`) to prevent "Invisible UI" bugs.
+
+---
+
 ### 🛠️ Sovereign Abstraction Gate
 - [ ] **State-Chain Enforcement**: Logic driven by XState Machines; Zero-boolean status flags.
 - [ ] **VAK Integration**: Interaction motion uses predictive velocity physics.

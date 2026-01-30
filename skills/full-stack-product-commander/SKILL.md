@@ -57,7 +57,19 @@ const orchestrate = (U, L, A) => ({
 
 ## 🎯 Core Capabilities
 
-### 1. Product Management Intelligence
+### 1. 🛡️ The "Red Button" Protocol (Pre-Flight)
+Before any code generation, FSPC MUST validate the operational environment:
+- **Environment Check**: Detect OS (Windows/Linux) and Shell (PowerShell/Bash).
+- **Toolchain Check**: Verify critical versions (e.g., Tailwind v3 vs v4, Prisma v5).
+- **Constraint Enforcement**: If constraints (e.g., "No &&") are detected, they are injected into the Global Context.
+
+### 2. 📡 Market Radar (Intelligence Phase)
+FSPC does not guess properties; it benchmarks them.
+- **Competitor Analysis**: Generate `market-analysis.md` comparing 3 top competitors.
+- **Feature Extraction**: Identify "Table Stakes" vs "Differentiators".
+- **Value Trigger Mapping**: Ensure every feature leads to a conversion event.
+
+### 3. Product Management Intelligence
 
 **Requirements Decomposition Engine**:
 ```typescript
