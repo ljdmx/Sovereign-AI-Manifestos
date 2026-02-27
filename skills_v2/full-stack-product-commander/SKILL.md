@@ -80,23 +80,32 @@ A module cannot pass the gate unless it meets hard numerical limits:
 **PRE-FLIGHT**:
 ```bash
 □ mkdir {project} → cd
-□ FinOps Cost Estimation (Determine Stack limits)
+□ FinOps Cost Estimation (Determine Stack limits via `[Scripts](scripts/)`)
 □ Environment Parity (init .env.dev/staging/prod, .gitignore)
 □ Dependency Security Audit (`npm audit`)
 □ Inject Telemetry/Analytics scaffold
 ```
 
 **EXECUTION** (Progressive Gates):
-1. **Discovery**: Product strategy → `PRODUCT_SPEC.md`. Architecture → `docs/adr/0001-init.md`.
+1. **Discovery**: Product strategy → `PRODUCT_SPEC.md`. Architecture → `docs/adr/0001-init.md` (Use `[Governance Templates](governance/)`). 
 2. **Shift-Left Phase**: AI writes E2E/Unit test cases for M1.
-3. **Module Delivery**: AI implements M1 behind **Feature Flags** + Non-destructive DB Migrations.
-4. **Quantitative Gate Check** (per module):
+3. **Template Match**: Scan `[Project Templates](templates/)` for boilerplate structural integration.
+4. **Module Delivery**: AI implements M1 behind **Feature Flags** + Non-destructive DB Migrations.
+5. **Quantitative Gate Check** (per module):
    ```bash
    □ build passes (tsc clean)
    □ Lighthouse perf proxy >= 90
    □ API p95 < 200ms target
    ```
-5. **Circuit Breaker**: Auto-patch (Max 3 retries) → Fallback.
-6. **Handoff**: Docker + Swagger + Playwright + Docs + Feature Flag config + **Rollback Runbook**.
+6. **Circuit Breaker**: Auto-patch (Max 3 retries) → Fallback.
+7. **Handoff**: Docker + Swagger + Playwright + Docs + Feature Flag config + **Rollback Runbook** (See `[Rollback Template](governance/)`).
+
+## 🗂️ Ecosystem Routing Protocol (Core Assets)
+The following resources MUST be accessed via `view_file` or executed during generation:
+- **[Governance Templates](governance/)**: Standardization for ADRs and Rollback Runbooks.
+- **[Utility Scripts](scripts/)**: CI/CD and FinOps execution tools.
+- **[Project Templates](templates/)**: Boilerplates for monolithic and microservice architectures.
+- **[Domain Knowledge](knowledge/)**: Contextual insights for specific domains.
+- **[Manifests](docs/)**: Commander documentation.
 
 > **FSPC: End-to-end orchestration fueled by quantitative quality, dark launches, zero-downtime mentality, precise rollback planning, and strict sovereignty.**

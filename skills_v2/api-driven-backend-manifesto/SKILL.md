@@ -72,10 +72,21 @@ auto_activate: true
 Apply when user requests: API/backend creation, enterprise architecture, database design.
 
 **EXECUTION Workflow**:
-1. **Schema Design**: Implement Enterprise Data Model + Connection Pool setup + Idempotency + Cursor Pagination rules.
-2. **Controller & Router**: Implement RFC 7807 Errors, Versioning, and strict Rate Limiting middleware.
-3. **Service Layer**: Identify slow ops → Auto-offload to Async Queues. Design Sagas for distributed states.
-4. **Data/Cache Layer**: Inject Jitter, Mutex Locks, and Anti-Penetration logic.
-5. **Telemetry & Contracts**: Setup JSON Logging, Trace IDs, Prometheus metrics, and Contract Testing definitions.
+1. **Blueprint Scan**: Use `list_dir` on the `[Blueprints Directory](blueprints/)`. ALWAYS copy the corresponding blueprint scaffold (e.g. Go Microservice or FastAPI Serverless). Do NOT write from scratch if a blueprint exists.
+2. **Schema Design**: Implement Enterprise Data Model + Connection Pool setup + Idempotency + Cursor Pagination rules.
+3. **Controller & Router**: Implement RFC 7807 Errors, Versioning, and strict Rate Limiting middleware.
+4. **Service Layer**: Identify slow ops → Auto-offload to Async Queues. Design Sagas for distributed states.
+5. **Data/Cache Layer**: Inject Jitter, Mutex Locks, and Anti-Penetration logic.
+6. **Telemetry & Contracts**: Setup JSON Logging, Trace IDs, Prometheus metrics, and Contract Testing definitions.
+7. **Red Team Audit**: Read and execute scripts in `[Red Team Tools](red_team/)` before handoff.
+
+## 🗂️ Ecosystem Routing Protocol (Core Assets)
+The following resources MUST be accessed via `view_file` or executed during generation:
+- **[Architecture Blueprints](blueprints/)**: Foundational templates for services.
+- **[Red Team Audit](red_team/security_audit.ts)**: Security validation scripts.
+- **[Implementation Templates](templates/)**: Standardized modules.
+- **[Utility Scripts](scripts/)**: Helper scripts for DB management.
+- **[Internal Documentation](docs/)**: ADBM deep-dive manuals.
+- **[Divine Interface](divine_interface.md)**: Metadata configuration.
 
 > **ADBM: Production-grade backends by default. Built for resilience, optimized for high concurrency, protected against system failures.**

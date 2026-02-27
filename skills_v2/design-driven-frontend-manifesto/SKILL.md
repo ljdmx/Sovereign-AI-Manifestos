@@ -89,7 +89,15 @@ auto_activate: true
 
 ### Workflow:
 1. `Load Tokens` → Follow proportions (Brand <=5%, Background 60-70%).
-2. `Generate Component` → Use strict semantic HTML. Sanitize all rich text inputs. Optimize images (`loading`, `width`, `height`).
-3. `Quality Gate` → Verify 5-state spectrum (Skeleton Empty/Loading/Error/Success/Partial), spacing (24-48px), optimistic UI behavior, XSS safety, and kinetic feels.
+2. `Template Match` → Scan `[UI Templates](templates/)` to avoid reinventing components.
+3. `Generate Component` → Use strict semantic HTML. Sanitize all rich text inputs. Optimize images (`loading`, `width`, `height`).
+4. `Quality Gate` → Verify 5-state spectrum, spacing, optimistic UI behavior, XSS safety, and kinetic feels.
+5. `Aesthetic Audit` → MUST execute `node [Aesthetic Scorer](tools/aesthetic-scorer.js)`. If the score is < 90, adapt CSS architecture iteratively until solved.
+
+## 🗂️ Ecosystem Routing Protocol (Core Assets)
+The following resources MUST be accessed via `view_file` or executed during generation:
+- **[Aesthetic Scorer Tool](tools/aesthetic-scorer.js)**: MANDATORY JS script to quantify UI visual metric quality.
+- **[UI Templates](templates/)**: Production-ready component boilerplate definitions.
+- **[System Specs](docs/)**: DDFM technical documentation.
 
 *Relying on this master methodology guarantees world-class, premium visual outputs with physical, fluid, resilient, secure, and accessible traits.*
