@@ -1,7 +1,7 @@
 ---
 name: design-driven-frontend-manifesto
 description: AI-powered frontend design system with world-class aesthetic sovereignty and methodology
-version: "3.2"
+version: "3.5"
 trigger_keywords: ["create component", "design system", "frontend component", "brand design", "UI development", "visual design", "dashboard", "landing page", "responsive layout", "dark mode", "animation", "mobile UI", "UI/UX", "color scheme", "accessibility"]
 auto_activate: true
 ---
@@ -78,11 +78,14 @@ auto_activate: true
 - **List Virtualization Protocol**: Any data list traversing > 200 rows MUST utilize DOM virtualization (`@tanstack/react-virtual`, `vue-virtual-scroller`) to prevent disastrous main-thread blocking and UI unresponsiveness. NEVER render massive raw DOM tables.
 - **Code Splitting (Dynamic Imports)**: Heavy dependencies (e.g., ECharts, PDF renderers, Map SDKs) MUST be dynamically imported (`import()`) and wrapped in Suspense with Skeleton fallbacks to avoid blocking the main bundle.
 - **Kinetic Parameters**: 
-  - **Spring Physics**: Default to spring animations (e.g., `stiffness: 400, damping: 30`) for scale/press effects to emulate physical weight.
-  - **Cubic-Bezier**: For CSS transitions, use Apple-grade curves like `cubic-bezier(0.25, 1, 0.5, 1)`.
+  - **Spring Physics (Visceral)**: Use spring animations (`stiffness: 400, damping: 30`) ONLY for immediate visceral physical actions like button presses.
+  - **Breathing Curve (Inner Peace)**: For loading, state transitions, and background shifts, MUST use a "Breathing Curve" (`cubic-bezier(0.4, 0, 0.2, 1)`, duration ~600ms). Animations must mimic human breathing—calm, slow, and anxiety-reducing. Reject hyper-fast synthetic flashes.
 - **Reduced Motion (A11y)**: All kinetic animations MUST respect `@media (prefers-reduced-motion: reduce)`. When active, transitions/animations MUST be instantaneous or fade-only to protect vestibular-sensitive users.
-- **Micro-interaction Vocabulary** (enforce globally for design consistency):
-
+- **Micro-interaction Vocabulary (Norman's 3 Levels of Psychology)**:
+  - **Instinct (Visceral)**: Speed and satisfaction. Buttons scale down instantly via spring to grant control.
+  - **Behavior (Behavioral)**: Clarity without anxiety. Errors provide an immediate "understanding" and clear resolution paths, never just red shaking text.
+  - **Reflection (Reflective)**: Meaningful completion. After long flows, give a restrained but profound sense of completion.
+  
   | Trigger | Animation Spec | Duration |
   |---|---|---|
   | Button press / tap | Scale down to 0.96 via spring (`stiffness: 400, damping: 30`) | ~80ms |
@@ -111,15 +114,25 @@ auto_activate: true
 
 **Hardware-Aware Degradation** (MUST): Detect `navigator.hardwareConcurrency < 4` OR `prefers-reduced-motion` media query. When triggered, automatically disable: `backdrop-filter: blur()`, `box-shadow` animations, and 3D CSS transforms. Target: maintain ≥ 60FPS on mid-range devices at all times.
 
+**Eco-Rendering & Idle Conservation (Environmental Respect)**: Monitor user activity. If the user is idle for > 3 seconds, the UI MUST drop its rendering footprint: pause all breathing gradients, halt unnecessary polling, and enter a "low-power" visual state. Code for planetary constraints.
+
 ## 6️⃣ Skeleton Screen Protocol
 - **Mandate**: Eliminate Cumulative Layout Shift (CLS) on load.
 - **Implementation**: The `[Loading]` state MUST NEVER rely solely on a generic spinning indicator. All data-driven modules MUST render an exact-dimension skeleton placeholder during initial data fetch.
 
-## 7️⃣ Shadow & Depth Design
+## 7️⃣ Micro-Surfaces & Lighting (Premium Aesthetic)
 - **Suggested Tiers:** Card (Light) -> Hover (Medium) -> Premium Block (Deep/Diffuse)
 - **Principle**: Soft, restrained, conveying a sense of physical elevation using multi-layered soft shadows (`box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), ...`).
+- **Dark Mode Lighting Rule**: Premium designs rely on light, not just darkness. Implement subtle Radial Background Glows beneath primary cards.
+- **Glassmorphism Detail**: Use 1px inner highlights on cards (`box-shadow: inset 0 1px 0 rgba(255,255,255,0.1)`) over solid borders. Apply fine-grained Noise Overlays (`mix-blend-mode: overlay`, `opacity: 0.03`) to eliminate flat "color banding" and add cinematic texture.
 
-## 8️⃣ UI Layout, Typography & Fluidity
+## 8️⃣ UI Layout, Typography & Premium Layout Patterns
+- **Premium Layout Patterns** (MUST for Consumer/Marketing bounds): DO NOT default to symmetric grids. Implement:
+  1. **Void/Emptiness (空无)**: Design for silence. If a border, shadow, or dividing line is not structurally required, REMOVE it. Use ultra-subtle background contrasts (`rgba(0,0,0,0.02)`) and pure spacing to separate elements.
+  2. **Immersive Spatial UI (Arc Paradigm)**: Eliminate hard containers. Use "Ambient Absorption" (acrylic blurs, frosted glass) and infinite soft shadows so the UI feels like it is floating in a calm, boundless space rather than trapped in boxes.
+  3. **Block-Fluidity (Notion Paradigm)**: Treat all content as uniform "Blocks". Enforce strict left-to-right reading alignment and identical vertical rhythm (line-heights/margins) so any combination of elements feels inherently calm and harmonious.
+  4. **Bento Box Grids**: Use asymmetric grid-template-areas for space-efficient feature highlights.
+  5. **Kinetic Typography**: Oversized titles with extremely tight tracking (`letter-spacing: -0.04em`) and extremely slow gradient shifts.
 - **Fluid Formula**: Utilize `clamp(min_size, preferred_vw, max_size)` for font-sizes and paddings for stepless scaling.
 - **Mobile-First Breakpoints**: Adopt Mobile-First `@media (min-width: ...)` strategy. Define standard breakpoints: `sm: 640px`, `md: 768px`, `lg: 1024px`, `xl: 1280px`, `2xl: 1536px`. Never invert to desktop-first.
 - **Data Density Protocol**: AI MUST explicitly classify the UI as **Consumer-Grade** (airy, parallax) or **Enterprise/Tool-Grade** (dense datagrids, sortable headers, bulk actions). A CMS or IoT dashboard MUST NEVER be styled as a marketing card layout.
@@ -147,8 +160,9 @@ auto_activate: true
 ## 1️⃣2️⃣ Rendering Islands Protocol
 - **Performance Threshold**: For heavily static pages (>75% static content), AI MUST prioritize Partial Hydration / Islands Architecture (e.g., Astro or React Server Components) over full Client-Side Rendering to maximize Lighthouse scores.
 
-## 1️⃣3️⃣ Mock-First & Zero-State Conversion
+## 1️⃣3️⃣ Hyper-Realism Data Mocking & Zero-State Conversion
 - **Mock-First Components (Storybook Ready)**: If the backend API is pending/failing, the UI MUST NOT white-screen. Components MUST include `defaultMockData` to render a high-fidelity static state.
+- **Hyper-Realism Data Rule**: NEVER use lazy mock data like "Item 1", "Test Text", or gray empty rectangles. AI MUST populate placeholders with high-fidelity, contextual data (e.g., real Unsplash URLs `<img src="https://images.unsplash.com/photo-..." />`, realistic copywriting matching the domain, formatted dates, contextual avatars). The mockup must look like a living product, not a wireframe.
 - **Zero-State Conversion (No Empty Rooms)**: When a list is genuinely empty (e.g., a new user with no sensors), NEVER just show "No Data". AI MUST draw an **Empty State with Call-to-Action (CTA)** (e.g., an illustration with a "[+ Add First Device]" button) to drive business conversion.
 
 ## 1️⃣4️⃣ Data Visualization Sovereignty (Data-Vis)
@@ -272,6 +286,7 @@ auto_activate: true
    | SSR hydration isolation (`"use client"` where needed) | 🛑 HARD BLOCK |
    | Business Edge-Cases (payment timeout, offline) modeled | 🛑 HARD BLOCK |
    | Mobile-First breakpoints applied | 🛑 HARD BLOCK |
+   | Anti-Gimmick Gate (No unnecessary 3D/animations hiding bad UX) | 🛑 HARD BLOCK |
    | Mock-First fallback (`defaultMockData`) present | ⚠️ WARN |
    | Data-Vis chart type matches decision tree | ⚠️ WARN |
    | i18n keys used (no hardcoded user-facing strings) | ⚠️ WARN |
@@ -314,6 +329,9 @@ When any of the following conditions occur, AI MUST generate `skill-amendment-pr
 
 | Version | Date | Summary |
 |---|---|---|
+| v3.5 | 2026-02-28 | Added: Breathing Kinetics, Arc-Immersive Space, Notion Block-Fluidity, and Eco-Rendering Idle Conservation |
+| v3.4 | 2026-02-28 | Added: Void/Emptiness (Kenya Hara), Norman's 3-level psychological micro-interactions, and the Anti-Gimmick Gate. |
+| v3.3 | 2026-02-28 | Added: Premium Layout Patterns (§8), Micro-Surfaces & Lighting (§7), Hyper-Realism Data Mocking (§13) |
 | v3.2 | 2026-02-28 | Fixed: §19/AI-Step-6 axis name unified to `Spatial Hierarchy`; Added Skill Kickoff Card to §0; bump version |
 | v3.1 | 2026-02-28 | Added: `aesthetic-scorer.js` canonical authority declaration (AI Step 6), Time-Based Decay in Evolution Triggers |
 | v3.0 | 2026-02-28 | Added: OKLCH Color Model (§2), Spring Physics 400/30 Reference Table + Frustration-Aware Kinetics + Hardware-Aware Degradation (§5), XState Mandate (§4) |

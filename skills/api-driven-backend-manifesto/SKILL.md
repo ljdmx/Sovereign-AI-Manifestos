@@ -1,7 +1,7 @@
 ---
 name: api-driven-backend-manifesto
 description: The definitive framework for AI-powered, architecturally sovereign backend systems. ADBM elevates API design from a technical task to a strategic imperative.
-version: "3.1"
+version: "3.4"
 multi-language: ["English"]
 trigger_keywords: ["create API", "backend service", "database design", "microservice", "REST API", "GraphQL", "API architecture", "backend architecture", "authentication", "authorization", "caching", "deployment", "CI/CD", "observability", "rate limiting", "webhooks", "event-driven", "queue", "build backend", "server-side", "Node.js", "NestJS", "FastAPI", "Express", "Django", "Spring Boot", "Prisma"]
 auto_activate: true
@@ -80,10 +80,11 @@ auto_activate: true
   | Reporting / Export (heavy) | Per-User Leaky Bucket | 10 req | 1 hour |
   | Webhooks / Public Ingestion | Per-Source IP | 500 req | 1 min |
 
-## 2️⃣ Standardized Error Contract (RFC 7807)
-- **Mandate**: API responses MUST never leak internal stack traces or use ad-hoc error structures.
-- **Implementation**: Adopt **RFC 7807 (Problem Details for HTTP APIs)** globally.
+## 2️⃣ Empathetic Error Contract (RFC 7807+)
+- **Mandate**: API responses MUST never leak internal stack traces or use cold, robotic language.
+- **Implementation**: Adopt **RFC 7807 (Problem Details for HTTP APIs)** globally, but inject empathy.
 - **Structure**: Every HTTP 4XX and 5XX response MUST return: `type`, `title`, `status`, `detail`, and `instance`.
+- **Empathy Injection**: Responses MUST additionally include `human_readable_cause` (explaining the "Why" gently) and `suggested_action` (providing the user's immediate next step, empowering them instead of confusing them).
 
 ## 3️⃣ Idempotency Protocol (Distributed Ready)
 - **Mandate**: Core non-safe state mutations MUST be immune to duplicate submissions, even under extreme concurrent race conditions.
@@ -183,6 +184,32 @@ auto_activate: true
 - **Replay Safety**: All replayed messages MUST carry original `Idempotency-Key`. Max replay rate = 50 messages/min.
 - **Ownership Mandate**: Every DLQ MUST carry a `DLQ_OWNER` tag. Ownerless DLQs are a deploy blocker.
 
+## 1️⃣5️⃣ LLM-Driven Application Protocol (AI-Native)
+- **Streaming by Default (UX Protection)**: ANY endpoint calling an LLM MUST default to Server-Sent Events (SSE) or WebSockets to stream tokens incrementally. A synchronous HTTP wait blocking for > 5 seconds is an automatic architecture failure.
+- **Async GenAI Task Offload**: For long-generation tasks (Images, Search, complex Agents), the core endpoint MUST respond `202 Accepted` and offload generation to a Celery/BullMQ worker loop, enabling client-side long-polling or WebSocket notification.
+- **Business Routing Constraint (Billing/Quota lock)**: Isolated AI endpoints without commerce routing are technically orphaned. ANY heavy generative API MUST have an explicit `Quota Middleware` (decrementing DB credits or Redis rate-limiters) executing *before* the expensive LLM execution.
+- **Prompt & Abuse Firewall**: Backend middleware MUST implement an explicit sanitization layer to block Prompt Injection (Jailbreaks) and enforce strict Token/Length constraints upstream of the LLM parser.
+
+## 1️⃣6️⃣ Digital Carbon Footprint & Occam's Razor
+- **Mandate**: Respect computing resources. Do not use Kafka or Kubernetes for a 100-request-per-day system.
+- **Execution**: Apply Occam's Razor. Always propose the simplest, lowest-carbon architecture first (e.g., Serverless Scale-to-Zero, or single Postgres + SQLite). The architecture brief MUST state: "This architecture minimizes idle compute resources in compliance with Digital Carbon Footprint protocols."
+
+## 1️⃣7️⃣ Long-Lasting Clean Architecture
+- **Mandate**: Do not intertwine core business logic with framework-specific magic (e.g., Next.js App Router handlers or Express middleware layers).
+- **Execution**: Implement Hexagonal Architecture. Core domain handlers MUST be pure functions, agnostic of the HTTP transport or specific cloud vendor, ensuring the code outlives the framework by 10+ years. Reject "hype-driven" over-coupling.
+
+## 1️⃣8️⃣ Local-First & Frictionless Privacy (Rewind Paradigm)
+- **Mandate**: The user's data belongs to the user. If data does not NEED to be shared across a network, it MUST NOT be persisted to the server.
+- **Execution**: Drafts, personal history, and deep reflection data MUST be stored in the client's `IndexedDB` or OPFS. The backend should operate strictly as a dumb, End-to-End Encrypted (E2EE) sync channel. Refuse to be a data-surveillance panopticon.
+
+## 1️⃣9️⃣ Zero-Friction Graph Aggregation (Linear Paradigm)
+- **Mandate**: Eliminate waiting. The user must never see a loading spinner when reading their own workspace.
+- **Execution**: Implement a **Sync Engine** pattern initialization. The backend pushes a highly compressed, incremental state payload via WebSocket or GraphQL immediately upon connection. All subsequent CRUD operations are executed synchronously in the client's memory graph while the backend syncs silently in the background.
+
+## 2️⃣0️⃣ Right to be Forgotten by Default
+- **Mandate**: A clean database is a calm database. Digital hoarding is a toxic anti-pattern.
+- **Execution**: Implement strict Database TTLs. Any intermediate state, error log, draft, or unused asset MUST have an automatic TTL (e.g., 7 days) to dissolve back into nothingness. The schema must enforce ephemeral data hygiene at the SQL layer.
+
 ---
 
 ## 🌐 Runtime Routing Matrix
@@ -270,6 +297,9 @@ When any of the following conditions occur, AI MUST generate `skill-amendment-pr
 
 | Version | Date | Summary |
 |---|---|---|
+| v3.4 | 2026-02-28 | Added: Local-First Privacy (Rewind), Zero-Friction Sync (Linear), and Right to be Forgotten TTL |
+| v3.3 | 2026-02-28 | Added: Empathetic Error Contract (RFC 7807+), Digital Carbon Footprint & Occam's Razor, Long-Lasting Clean Architecture |
+| v3.2 | 2026-02-28 | Added: LLM-Driven Application Protocol (§15) with Streaming, Async Offload, Billing/Quota Routing, and Abuse Firewall |
 | v3.1 | 2026-02-28 | Added: Skill Kickoff Card (§0), divine_interface.md multimodal pre-check in AI Execution Protocol |
 | v3.0 | 2026-02-28 | Added: Expanded trigger_keywords to 27 (framework-specific terms), Time-Based Decay in Evolution Triggers |
 | v2.3 | 2026-02-28 | Added: Edge-First Sovereignty (§9), Service Mesh & mTLS (§9) — merged from MANIFEST.md into active ruleset |
