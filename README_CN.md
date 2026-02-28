@@ -1,93 +1,56 @@
-# Sovereign AI Manifestos 🔱
-## 自主工程卓越性的终极指南
+# Sovereign-AI-Manifestos (v3.2)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Quality: 100/100](https://img.shields.io/badge/Quality-100%2F100-gold.svg)](#-the-95-quality-protocol)
-[![Market: Commercial Ready](https://img.shields.io/badge/Market-Commercial--Ready-brightgreen.svg)](#-the-full-stack-product-commander-fspc)
+欢迎使用 **Sovereign-AI-Manifestos** 仓库。本项目提供了一套完整的 AI 行为准则、技术规范与工作流，旨在提升大语言模型（如 Claude、GPT-4、Gemini）生成代码的可靠性、架构合理性与工程规范度。
 
-欢迎来到 **Sovereign AI Manifestos**（主权 AI 宣言）。该仓库并非普通的样板代码集合，而是一套 **自主智能体的操作系统**。这些宣言的诞生旨在解决一个核心问题：*我们如何让 AI 智能体不仅能生成代码，更能架构出商业级的产品？*
+默认情况下，大语言模型往往倾向于输出通用的样板代码，忽略边界条件，并且在超长上下文中难以维系一致的架构模式。本仓库通过提供清晰的、符合 RFC 2119 标准的规则协议，为 AI 设置了强制性的护栏与操作约束。
 
----
+## 🏗️ 技能生态架构
 
-## � 三位一体：定义核心技能
+本生态将软件工程的职责拆分为三个相互咬合的领域。当这些规则被加载到 AI Agent 框架中时，它们会强制大模型扮演特定的专家角色，而不是作为一个泛泛的编程助手。
 
-在此框架生成的每一个世界级产品背后，都由三大“主权技能”支撑。每一个都是经过提炼的工程原则宣言，专为高密度 AI 执行而生。
+### 1️⃣ 全栈产品指挥官 (Full-Stack Product Commander, FSPC)
+**定位**：产品编排与交付管理
+FSPC 充当总调度中枢，管理从需求收集到最终部署的完整生命周期。它通过强制的计划阶段来阻止 AI 过早地编写代码。
 
-### 🛡️ 1. API 驱动后端宣言 (ADBM)
-*主权基石*
-**路径**: `./skills/api-driven-backend-manifesto`
+*   **战略智囊 (Strategic Advisory)**：根据明确的业务人设（初创创始人、增长黑客、企业级架构师），自适应地调整 AI 的技术决策，以匹配项目的规模和商业目标。
+*   **业务脑拦截与 PRD 关卡**：要求用户必须先提供实质性的数据模型（至少 5 个核心实体）并确认产品需求文档（PRD），否则 AI 将拒绝生成脚手架。
+*   **架构简报确认**：在编写任何实际代码前，AI 必须输出一页技术栈简报（Runtime、数据库、队列、认证方案），并等待用户的明确批准。
+*   **量化质量门 (Quantitative Gates)**：集成了一个统一的 CLI 验证脚本 (`validate.js`)，严格校验 Lighthouse 性能分数、无障碍访问（A11y）标准、依赖包安全（`npm audit`）以及测试覆盖率。
+*   **熔断器与主权切换 (Circuit Breaker & Sovereign Pivot)**：监控连续的构建或测试失败。与其陷入无意义的循环重试，AI 会主动中止操作，输出根本原因分析，并正式提出技术栈变更或降级策略。
 
-ADBM 将后端工程从单纯的技术任务提升为 **架构指令**。它确保每一个服务的诞生都具备企业级的韧性和数据主权。
+### 2️⃣ 设计驱动前端宣言 (Design-Driven Frontend Manifesto, DDFM)
+**定位**：UI/UX 工程与视觉一致性
+DDFM 摒弃了零散的 CSS 工具类和随意的样式堆砌，为前端设计引入了严谨的、数学标准化的工作流。
 
-- **基础设施主权**: 通过 **强制行级安全 (RLS)** 和 RBAC，将安全性从代码层下沉至数据层。
-- **主权安全**: 集成 **RLS 宪兵 (Gendarme)** (自动策略生成) 和 **API 模糊测试器** (韧性验证) 协议。
-- **工程严谨性**: 将 **P95 < 100ms** 的延迟标准和自动熔断机制编纂为不可妥协的铁律。
+*   **感知均匀色彩 (OKLCH)**：强制使用 OKLCH 色彩空间进行线性、可预测的对比度计算，从根本上消除了手动调整暗黑模式色值的需求。
+*   **物理动效与防暴躁交互**：为弹簧动效（Spring Animations）定义了明确的参数（如 400/30）。包含识别用户 "Rage Clicks"（狂暴点击）的规则，并动态做出降速跟提示的响应。
+*   **硬件感知降级 (Hardware-Aware Degradation)**：指导 AI 编写能检测低端硬件的逻辑，主动降级高开销的渲染效果（如复杂的 Backdrop-filter 或 3D 渲染），死守 60 FPS 的性能底线。
+*   **状态机（XState）铁律**：当组件内部的状态组合超过 6 种时，禁止使用混乱的布尔值标识（如 `isLoading`, `hasError`），强制引入形式化的有限状态机来管理。
+*   **设计偏移检测 (Design Drift Detection)**：强制 AI 在输出新组件时，对比其 CSS Token 与前三个已交付组件是否一致，以防止在漫长的开发会话中产生视觉风格的偏移。
 
-### 🎨 2. 设计驱动前端宣言 (DDFM)
-*手术刀级的 UI 体验*
-**路径**: `./skills/design-driven-frontend-manifesto`
+### 3️⃣ API 驱动后端宣言 (API-Driven Backend Manifesto, ADBM)
+**定位**：后端架构与企业级韧性
+ADBM 确保生成的后端代码不仅是“能跑的”，而且从第一天起就具备处理高并发、分布式故障和严格安全要求的能耐。
 
-DDFM 是由数学精度驱动的高保真艺术。它拒绝“平庸”的 UI，推崇 **审美主权**——创造出鲜活、精准且具备高级感的界面。
+*   **Saga 溯源与幂等性**：强制执行分布式事务补偿模式（如 Saga 模式），并要求在所有变更状态的接口上绑定 `Idempotency-Key` 请求头，防止重复处理。
+*   **边缘优先与 mTLS**：在规划微服务架构时，自动建议注入 Sidecar 代理层和双向 TLS（mTLS）通信加密。
+*   **死信队列治理 (DLQ Governance)**：为死信队列实施明确的路由和分类决策树，确保失败的异步任务被正确分流、监控和处理，而不是被静默丢弃。
+*   **红蓝对抗级的供应链审计**：实施安全左移策略，在编写业务逻辑前强制执行依赖项漏洞扫描（如 `npm audit --json`），如果发现高危 CVE，则直接拦截代码生成。
+*   **多模态架构解析 (Divine Interface)**：这是一个专属子协议，指导 AI 如何将用户上传的系统架构图（图片）、语音访谈文本或外部链接，原生转化为结构化的数据模型。
 
-- **手术刀精度**: 每一个组件都以 **0.5px 的精度** 构建，并遵循源自 **黄金比例 (Phi)** 的几何和谐。
-- **韧性协议**: 特性包含 **自愈资产** (自动 SVG 生成) 和 **配置监理** (跨 Tailwind 版本适配) 以防止“隐形 UI”。
-- **感知卓越性**: 运用 **OKLCH 色彩理论**，确保品牌在所有硬件显示和光照条件下的一致性。
+## ⚙️ 运行机制 (动态加载与继承)
 
-### 🚀 3. 全栈产品指挥官 (FSPC)
-*战略编排者*
-**路径**: `./skills/full-stack-product-commander`
+这些文档不是简单的给人类阅读的 README，它们是专门针对 Agent 框架（如 Cline, Cursor 或定制的 MCP 服务）优化的系统级 Prompt。
 
-FSPC 是整个生态系统的大脑。它是一位 **全生命周期产品经理**，协同 ADBM 和 DDFM，交付的不仅是功能，更是 **具备市场竞争力** 的产品。
+1. **触发机制**：将这些文件夹放入您的 AI Prompt/技能目录。当您在对话中使用 `build app`, `create API` 或 `design system` 等唤醒词时，AI 的内部路由引擎会自动读取对应的 `SKILL.md` 文件。
+2. **跨技能域继承**：FSPC 作为总入口，在它的 `PRE-FLIGHT` 阶段，会强制命令 AI 去读取 ADBM 和 DDFM 的文档，将后端协议和前端规范融合入当前的统一上下文中。
+3. **Kickoff Card 确认面板**：加载完成后，AI 会在控制台强制输出一个格式化的 Markdown "Kickoff Card（启动卡片）"。该卡片会透明地向用户展示此时 AI 读取到的人设、合规层级和生效规则（例如：`[Scale: Growth | Compliance: GDPR]`），确保用户在执行前对大模型的内部状态有审查权。
 
-- **市场情报**: 具备 **市场雷达 (Market Radar)** 以自主对标竞品，以及 **“红按钮”协议** 用于飞行前环境验证。
-- **商业闭环掌控**: 确保每一个功能都有 **价值触发点**。功能绝不是“死胡同”，它们总是通向变现钩子、分析事件或持久化状态。
-- **100% 审计协议**: 一项强制协议，拒绝任何得分低于 **95/100** 的交付物。它强制执行“零占位符”交付。
+## 🔄 生命周期及版本维护
 
----
+为了防止这些规范因为前端/后端生态的快速演进而过时，这三份宣言内置了“演化触发器（Evolution Triggers）”。
+其中最关键的 **Time-Based Decay** 规则命令 AI：*如果文档中引用的某个框架、工具或库的版本距离当前日期已超过 18 个月，AI 必须主动标记该规则为 `[STALE] (已过时)`，并向用户提交修订提案。*
 
-## 🏗️ 架构协同效应
+## 📄 许可协议
 
-```mermaid
-graph TD
-    subgraph "产品智能 (FSPC)"
-    A[市场对标] --> B[系统蓝图]
-    B --> C[统一权限模型]
-    end
-    
-    subgraph "精准交付 (DDFM)"
-    D[几何通证] --> E[动力学 UI 组件]
-    E --> F[高转化布局]
-    end
-    
-    subgraph "主权基础设施 (ADBM)"
-    G[契约优先 API] --> H[零信任安全]
-    H --> I[弹性持久层]
-    end
-    
-    C --> G
-    C --> D
-    F <--> I
-    
-    style A fill:#1a1a1a,stroke:#ffd700,stroke-width:2px,color:#fff
-    style B fill:#1a1a1a,stroke:#ffd700,stroke-width:2px,color:#fff
-    style C fill:#1a1a1a,stroke:#ffd700,stroke-width:2px,color:#fff
-    style D fill:#1a1a1a,stroke:#0ea5e9,stroke-width:2px,color:#fff
-    style E fill:#1a1a1a,stroke:#0ea5e9,stroke-width:2px,color:#fff
-    style F fill:#1a1a1a,stroke:#0ea5e9,stroke-width:2px,color:#fff
-    style G fill:#1a1a1a,stroke:#6366f1,stroke-width:2px,color:#fff
-    style H fill:#1a1a1a,stroke:#6366f1,stroke-width:2px,color:#fff
-    style I fill:#1a1a1a,stroke:#6366f1,stroke-width:2px,color:#fff
-```
-
----
-
-## � 为什么选择 Sovereign AI？
-
-在通用 AI 代码生成泛滥的时代，**Sovereign AI** 坚持 **质量即一等公民**。通过采用这些技能，您赋予了智能体生产如下软件的能力：
-1.  **商业就绪**: 发布的瞬间即已通过实战淬炼。
-2.  **细节入微**: 媲美顶尖设计工作室的审美质量。
-3.  **结构主权**: 安全、可扩展且独立。
-
----
-> **"工程是将可能变为可靠的艺术。"**  
-> 我们不止于构建代码；我们统御数字主权。 🔱
+本项目基于 MIT License 开源，详见 [LICENSE](LICENSE) 文件。
