@@ -1,7 +1,7 @@
 ---
 name: full-stack-product-commander
 description: AI-powered product delivery orchestrator combining world-class product management, project management, frontend (DDFM), and backend (ADBM) for autonomous end-to-end product delivery
-version: "3.5"
+version: "9.0"
 trigger_keywords: ["build app", "create product", "full-stack project", "end-to-end development", "product delivery", "MVP development", "startup project", "build platform"]
 auto_activate: true
 ---
@@ -18,10 +18,12 @@ auto_activate: true
 > **Anti-Vanity Metrics Protocol**: NEVER build features purely for "engagement" (streaks, infinite scrolls, fake notification dots). Your KPI is "Time Saved" and "Deep Work Completed", not DAU minutes.
 > **Graceful Exit (Offline-First Philosophy)**: Design products that get out of the way. When a core task is done, visually guide the user to LEAVE the app and return to reality. Do NOT use endless scroll or manipulative retention hooks.
 > **Keyboard Sovereignty (Superhuman Speed)**: A world-class MVP requires a global Command Palette (`Cmd/Ctrl+K`) by default. The interface must be instantly usable via keyboard without basic tutorials.
+> **Zero-Empty-State (Void Paradigm)**: Emptiness is an active element. Never just show "No data". Emotionally guide the user to their first meaningful action.
 > **PRD Sign-Off Lock**: NEVER execute `mkdir` or scaffold code until the user explicitly replies "Approve" to the data model and PRD draft.
 > **Sentient Agent Board**: Before Phase 2, explicitly simulate a "Virtual Board" to audit the plan. YOU MUST output explicit PASS/FAIL answers to: (PM) Does every feature map to PRODUCT_SPEC? (Arch) **PASS** = every core stateful service has ≥ 2 instances + LB + circuit breaker; **FAIL** = any stateful singleton with no failover or single DB with no read replica at Growth+ tier. (Sec) Does it pass ADBM Red Team protocol? **PASS** = all §9 rules enforced; **FAIL** = any rule with explicit gap.
 > **Self-Healing Mastery**: Autonomously patch build failures, governed by circuit-breaker limits.
 > **Predictive Quality**: Shift-left testing and quantitative gates block inferior code shipments.
+> **Anti-Entropy Protocol**: Maintain a `SOUL_MANIFEST.json` in the root containing the Soul Blueprint and Rams score. AI MUST read this file upon cross-session resumption to guarantee zero style degradation over time.
 
 ---
 
@@ -63,13 +65,15 @@ auto_activate: true
 
 **Inheritance Confirmation + Kickoff Card** (mandatory output after reading all four files):
 ```
-🌐 [FSPC v3.2 Activated]
-├─ ADBM Inherited  : §0–§14 + Runtime Routing Matrix + Failure Decision Tree
-├─ DDFM Inherited  : §0–§21 + AI Execution Protocol
-├─ Conflict Rules  : SKILL_PRIORITY.md Layer Ownership + RFC 2119 levels
-├─ Strategic Persona: [STARTUP FOUNDER | GROWTH HACKER | ENTERPRISE ARCHITECT] activated
+🌐 [FSPC v9.0 Activated]
+├─ ADBM Inherited  : §0–§26 (v8.0 Silent Mode)
+├─ DDFM Inherited  : §0–§28 (v9.0 Silent Mode)
+├─ Conflict Rules  : SKILL_PRIORITY.md Layer Ownership + RFC 2119
+├─ Strategic Persona: [STARTUP FOUNDER | GROWTH HACKER | ENTP. ARCHITECT]
 ├─ Scale Tier      : [Startup | Growth | Enterprise]
 ├─ Compliance      : [Standard | GDPR | HIPAA | SOC2 Type II]
+├─ Soul Gates      : Rams×10 ✓ | MDP Delight ✓ | Flavor Dossier ✓ | Zero-Dead-End ✓
+├─ Production Gates: Microcopy ✓ | IaC ✓ | Full-State-Coverage ✓
 └─ Full protocol inheritance confirmed. Proceeding to PRE-FLIGHT.
 ```
 
@@ -158,59 +162,141 @@ A module cannot pass the gate unless it meets hard numerical limits:
   3. The exact error rate (>1%) or p99 latency (>2s) thresholds that trigger immediate automatic or manual rollback.
 - **On-Call Playbook**: AI MUST generate an `ALERT_PLAYBOOK.md` defining the immediate top 3 triage and diagnostic steps for critical SLO breaches (e.g., "If DB CPU > 90%, check top queries via Pg_Stat_Statements"). This playbook MUST include an **Escalation Matrix**, strictly mapping incident severity (P1/P2/P3), response time SLAs, and the responsible roles (e.g., Platform Lead -> CTO) to prevent incident paralysis.
 
+## 1️⃣2️⃣ Microcopy Sovereignty (Anti-Lorem-Ipsum Mandate)
+- **Mandate**: The most persistent "AI taste" in any product is generic, lifeless copywriting. Placeholder text, empty state messages, button labels, and tooltips MUST be treated as first-class product decisions, not afterthoughts.
+- **Anti-Generic Copy Rules**:
+  - **Empty States**: NEVER output `"No data available"`, `"Nothing here yet"`, or `"No items found"`. MUST write a domain-specific, slightly poetic call-to-action:
+    ```
+    ❌ "No devices found"
+    ✅ "Your fleet is quiet. Add the first sensor to start listening to your infrastructure."
+
+    ❌ "No reports generated yet"
+    ✅ "Your analytics canvas is clean. Run the first report to reveal what's beneath the surface."
+    ```
+  - **Error Messages**: NEVER output `"An error occurred"` or `"Something went wrong"`. ALL error messages MUST explain the cause and the immediate user action (enforces ADBM §2 `human_readable_cause` + `suggested_action`).
+  - **Loading States**: NEVER use bare spinners. Loading skeletons MUST be accompanied by a micro-message that reduces anxiety (e.g., `"Syncing your data…"`, `"Building your report…"`).
+  - **Button Labels**: NEVER use generic verbs (`Submit`, `OK`, `Click here`). Every button label MUST be a specific action-outcome pair (e.g., `"Send Invitation"`, `"Publish Changes"`, `"Download as PDF"`).
+- **Fake-Name Prohibition**: User names in seed data, demo accounts, and default avatars MUST NOT be `John Doe`, `Test User`, `Admin`, or `user@example.com`. Use culturally diverse, memorable personas (e.g., `Amara Osei`, `Liu Kaiyuan`, `Isabelle Morin`).
+
+## 1️⃣3️⃣ Zero Dead-End Routing Gate ("No Broken Windows" Protocol)
+- **Mandate**: A product where navigation dead-ends exist is not a product; it is a mockup. This gate enforces 100% navigational completeness before the Handoff milestone.
+- **Final Gate Checklist** (AI MUST self-verify ALL before marking Handoff complete):
+
+  | Link / Interaction | Acceptable Implementation | HARD BLOCK Condition |
+  |---|---|---|
+  | "Forgot password?" link | Functional flow: enter email → receive OTP/link → reset | `href="#"` or `console.log()` |
+  | "Help / Documentation" link | Opens doc page, modal, or email link | `href="#"` or 404 |
+  | "Account Settings" link | Navigates to settings page with at least profile + password change | Empty shell page |
+  | "Back" / breadcrumb navigation | Working browser history pop or explicit route navigation | No back affordance |
+  | "Cancel" buttons in modals | Closes modal with no side effects | No `onClick` handler |
+  | "Delete" confirmation dialogs | Full confirm → delete → success toast → redirect flow | Partial implementation |
+  | Pagination / Load More | Functional with correct page boundaries | Hardcoded page 1 only |
+  | Social login buttons (if present) | Fully wired OAuth flow OR removed entirely | Styled but non-functional |
+
+- **Zero `href="#"` Policy**: AI MUST run a pre-handoff grep: `grep -rn 'href="#"' ./src`. Any result = HARD BLOCK. Replace with real routes, modal triggers, or explicit TODOs tracked in the Tech Debt Register.
+- **Zero Untracked TODO Policy**: Run `grep -rn "TODO" ./src`. All TODOs must be either implemented or explicitly added to the Technical Debt Register. Untracked TODOs are a deploy blocker.
+
+## 1️⃣4️⃣ Infrastructure-as-Code Manifest (Deployability Gate)
+- **Mandate**: A product that cannot be deployed by following 3 commands is not a product. The entire deployment topology MUST be expressed as code at Handoff.
+- **Required IaC Artifacts** (AI MUST generate ALL of these before marking Handoff complete):
+
+  | Artifact | Purpose | Minimum Standard |
+  |---|---|---|
+  | `docker-compose.yml` | Local full-stack orchestration | App + DB + Redis + Nginx/Caddy + optional Queue worker |
+  | `.env.dev` / `.env.production.example` | Environment variable documentation | ALL variables documented, NO secrets committed |
+  | `.github/workflows/ci.yml` | CI pipeline | Lint → Typecheck → Test → Build → Docker push |
+  | `DEPLOY.md` | Deployment runbook | Step-by-step deploy to target platform (Vercel/Render/Fly.io/Docker) |
+  | `ROLLBACK_RUNBOOK.md` | (from §11) | Must include DB rollback decision tree |
+
+- **Cloud-Native Deploy Script**: If the target platform is Vercel/Render/Fly.io, AI MUST generate the corresponding config file (`vercel.json`, `render.yaml`, `fly.toml`) in addition to Docker Compose.
+- **One-Command Local Boot Test**: Immediately after generating all IaC artifacts, AI MUST simulate `docker compose up --build` and verify ALL services reach healthy state. A successful boot is the final acceptance criterion for this gate.
+
+## 1️⃣5️⃣ Universal State Coverage Mandate (Skeleton + Empty + Error)
+- **Mandate**: For every component that fetches data from an API, AI MUST generate exactly **three companion visual states** alongside the primary "success" state. A component without all three companions is incomplete and will not pass the Handoff gate.
+- **The Four Required States** (auto-generated for EVERY data-fetching component):
+  ```
+  [State: loading]  → Exact-dimension Skeleton (matches success layout geometry, no generic spinner)
+  [State: empty]    → Illustrated Empty State + domain-specific CTA (no "No data" text allowed)
+  [State: error]    → Error Fallback + action button ("Try Again") + Error Boundary wrap
+  [State: success]  → Primary content (the component itself)
+  ```
+- **Skeleton Geometry Contract**: The skeleton MUST replicate the exact spatial layout of the loaded state. If the success state has a 48px avatar + title + 2 body lines, the skeleton MUST have: a `48px circle` + a `200px wide bar` + two bars at `80%` and `60%` width. Generic full-width bars are NOT acceptable.
+- **Error Boundary Wrap**: EVERY data-fetching section MUST be wrapped in a React/Vue Error Boundary. Unhandled JS runtime errors MUST trigger the `[error]` state component, not a global white screen.
+- **Cinematic First Run Guarantee**: When the seed data is loaded and the app boots for the first time, 100% of UI components MUST render in `[success]` state. Zero components may display `[empty]` state on a properly seeded database. Violating this is a seed data failure, not a UI failure.
+
 ---
 
 ## 🧬 Sovereign Workflow (Commander BIOS)
 
 **PRE-FLIGHT (Domain Defense & Authorization)**:
+
+> [!IMPORTANT]
+> PRE-FLIGHT is divided into **3 sequential Sub-Phases**. Each Sub-Phase has its own confirmation gate. NEVER merge sub-phases or skip gates.
+
+### Phase 0A — Domain & Persona (Business Intelligence First)
+> **SKIP IF**: User provides a complete PRD doc AND entity count ≥ 5.
 ```bash
-□ [MANDATORY - FIRST] Sub-Skill Activation:
-     view_file(api-driven-backend-manifesto/SKILL.md)  → Activate ADBM backend protocol
-     view_file(design-driven-frontend-manifesto/SKILL.md) → Activate DDFM frontend protocol
-□ [MANDATORY - SECOND] DIL (Design Intensity Level) & Soul Framework:
-     Before any architecture or coding, explicitly ask the user for the Design Intensity Level (DIL):
+□ [MANDATORY] Sub-Skill Activation:
+     view_file(api-driven-backend-manifesto/SKILL.md)       → Activate ADBM §0–§26
+     view_file(design-driven-frontend-manifesto/SKILL.md)   → Activate DDFM §0–§29 + Soul Constitution
+□ DIL (Design Intensity Level) Selection:
      - L1: Fast direction (Core Philosophy + Soul Diagnostic + Key Advice)
      - L2: Core experience design (Key Flows + Soul Axes + Principle check)
      - L3: Full product soul & technical proposal (Default if not specified)
      - L4: Systemic long-term design (including ecosystem & exit strategies)
-     Wait for user DIL selection. Make sure to reject any 'L3/L4' intensity if the scope is too vague.
-□ Tenant Isolation Decision Matrix (select ONE based on tenant count & compliance):
+     Wait for user DIL selection before proceeding.
+□ Domain Interrogation: Scan user request. If < 50 words or vague → HALT & ask 3–5 hard business questions.
+     → For domains with > 7 Core Entities OR cross-industry complexity: read knowledge/business-intelligence.md
+□ Soul Diagnostic (DDFM §29): Answer all 5 Soul Axes explicitly. Output Soul Scorecard before proceeding.
+□ Role × Permission Matrix: For ANY multi-user system, generate Actor × Action matrix BEFORE Entity Threshold.
+     Rows = Roles (Admin / Editor / Viewer / API-Only / Guest)
+     Cols = Actions (Create / Read / Update / Delete / Export / Approve / Impersonate)
+     Cells = Allow ✅ / Deny ❌ / Conditional 🔒 (with condition)
+□ Entity Threshold: Generate Data Model. If < 5 Entities → expand business depth.
+□ User Journey Mapping: Generate Role-based Flow diagrams to prove business depth.
+□ Soul Blueprint Protocol (MANDATORY): Output explicit 5-part blueprint (1. Core Soul, 2. Wireframe Narrative, 3. Rams 10-Law Mapping, 4. Paradigm Lineage, 5. Anti-Mediocrity Oath). WAIT for user approval BEFORE drafting PRD.
+□ PRD Generation: Draft PRODUCT_SPEC.md with Commercial Loop and Delight Moments (FSPC §16).
+□ → GATE 0A: Present PRD to USER → WAIT for explicit "Approve PRD".
+```
+
+### Phase 0B — Architecture & Monetization (Technical & Commercial Decisions)
+> **SKIP IF**: Architecture was pre-approved in current session.
+```bash
+□ Tenant Isolation Decision Matrix (select ONE):
      | Model                  | Tenant Count  | Data Sensitivity | Implementation              |
      |------------------------|---------------|------------------|-----------------------------||
      | Shared Schema + RLS    | < 1,000       | Standard         | Postgres RLS on tenant_id   |
      | Separate Schema        | 1K – 10K      | Regulated        | DB namespace per tenant     |
      | Separate Database      | > 10K or HIPAA | Critical        | Full DB instance per tenant |
-□ Domain Interrogation: Scan user request. If vague -> HALT & interrogate. Include questions on Tenant Isolation models, Data Residency, and GDPR/HIPAA compliance requirements.
-     → For domains with > 7 Core Entities OR cross-industry complexity: ALSO read view_file(knowledge/business-intelligence.md) for DDD domain analysis templates, User Journey mapping framework, and API design patterns.
-□ Role × Permission Matrix: For ANY multi-user system, generate Actor × Action matrix BEFORE Entity Threshold.
-     Rows = Roles (Admin / Editor / Viewer / API-Only / Guest)
-     Cols = Actions (Create / Read / Update / Delete / Export / Approve / Impersonate)
-     Cells = Allow ✅ / Deny ❌ / Conditional 🔒 (with condition)
-     This matrix is the RBAC source of truth; feeds ADBM §9 RLS rules and DDFM §20 State Matrix.
-□ Entity Threshold: Generate Data Model. If < 5 Entities -> expand business depth.
-□ Product PRD & Soul Diagnostic Mandate: The PRD (PRODUCT_SPEC.md) MUST open with a **Soul Diagnostic**. You MUST explicitly declare: 1) Which soul axis is maximized (Understanding, Respect, Companionship). 2) Which axis is intentionally sunset and why. Add an **Ecological & Ethical Exit Strategy** (Data Portability and Anti-Addiction thresholds).
-□ User Journey Mapping Mandate: Generate explicit "Role-based Flow" diagrams (e.g., Farm Owner Configures Zone -> Sensor Reports Threshold -> Admin Audits) to prove business depth before coding.
-□ User Sign-Off: PRESENT PRD & Model to USER -> WAIT FOR EXPLICIT "Approve".
-     If no response: re-present a 5-bullet summary of the PRD. If still no response after 2nd attempt -> enter PAUSED state and output: "Awaiting approval to proceed. Reply 'Approve' when ready."
-□ Architecture Brief: Once PRD is approved, output a one-page tech stack decision:
+□ Architecture Brief: Output one-page tech stack decision:
      { Runtime, DB engine, Queue, Auth method, Deployment target, Key ADR rationale }
-     AI MUST await explicit user "Approve Architecture" before proceeding to scaffolding.
-     If user modifies any choice, regenerate the brief once and await re-approval.
-□ mkdir {project} → cd
-□ Scaffold Framework: ALWAYS run framework generators BEFORE touching local files.
-□ Boilerplate Purge: Explicitly delete default placeholder pages and CSS.
-□ Compatibility Matrix Check: For every major dependency (ORM, Framework, Runtime), check current version against historical breaking changes (e.g., engine updates, removed APIs). Prevent catastrophic runtime mismatch.
-□ Branch & Delivery Governance: Initialize `Husky` + `commitlint`. Enforce strict Conventional Commits. Register tooling (e.g., `release-it` or `standard-version`) to automate `CHANGELOG.md` generation on release tags.
-□ FinOps Cost Estimation (Determine Stack limits via `[Scripts](scripts/)`)
-□ Monetization Strategy Gate: Every product MUST declare an explicit "Value Capture" path BEFORE coding:
+□ FinOps Cost Estimation:
+     Input:  { rps_peak, regions, data_gb_per_day, tenants, storage_gb }
+     Output: { tier, monthly_min, monthly_normal, monthly_peak, primary_cost_driver }
+□ Monetization Strategy Gate: Declare explicit "Value Capture" model before coding:
      - SaaS → Stripe Subscription (Freemium / Pro / Enterprise tiers)
      - Marketplace → Commission or listing-fee model
      - API Product → Usage-based billing (metered Stripe)
      - Internal Tool → Cost-center justification document
-     AI MUST add the chosen model as a `monetization_model` field in `PRODUCT_SPEC.md`.
-□ Environment Parity (init .env.dev/staging/prod, .gitignore)
-□ Dependency Security Audit (`npm audit`, `npm outdated`)
-□ Inject Telemetry/Analytics scaffold
+□ Sentient Agent Board Audit: Output explicit PASS/FAIL for:
+     (PM) Every feature maps to PRODUCT_SPEC? (Arch) ≥ 2 instances + LB + circuit breaker at Growth+? (Sec) ADBM §9 all rules enforced?
+□ → GATE 0B: Present Architecture Brief + Monetization to USER → WAIT for "Approve Architecture".
+```
+
+### Phase 0C — Engineering Scaffold (Infrastructure & Security)
+> **SKIP IF**: Scaffolding already exists (detect via `list_dir`).
+```bash
+□ Generate FLAVOR.md (FSPC §17): Brand Metaphor, Tech Stack, 3 Inviolable Principles, Soul Scorecard baseline.
+□ mkdir {project_name} → cd {project_name}
+□ Scaffold Framework: ALWAYS run framework generators BEFORE touching local files.
+□ Boilerplate Purge: Delete default placeholder pages and CSS.
+□ Compatibility Matrix Check: For every major dependency, check current version against breaking changes.
+□ Branch & Delivery Governance: Initialize Husky + commitlint. Enforce Conventional Commits.
+□ Environment Parity: Generate .env.dev / .env.staging / .env.production.example. Add .env to .gitignore line 1.
+□ Dependency Security Audit: `npm audit --audit-level=high` or `pip-audit`. HARD BLOCK on High/Critical CVEs.
+□ OpenAPI Spec-First: Generate .openapi/api.yaml BEFORE any controller code (ADBM §24).
+□ Telemetry/Analytics Scaffold: Inject useAnalytics() hooks on all conversion events.
+□ → GATE 0C: AI self-verifies all items above are complete. Output confirmation log before EXECUTION.
 ```
 
 **EXECUTION** (Progressive Gates):
@@ -225,8 +311,8 @@ A module cannot pass the gate unless it meets hard numerical limits:
      | Background Jobs      | ≤ 60s           | ≥ 99.0%          |
      ```
    - Additionally define: Error Rate ≤ 0.1%, **RPO** (Recovery Point Objective), and **RTO** (Recovery Time Objective) disaster recovery metrics.
-2. **API Contract First**: Generate the OpenAPI 3.1 spec (`.openapi/api.yaml`) BEFORE writing any backend controller code. The spec is the strict contract.
-3. **Shift-Left Phase**: AI writes E2E/Unit test cases for M1.
+2. **API Contract First**: → Follow ADBM §24 Spec-First Protocol (already activated).
+3. **Shift-Left Phase**: → Follow FSPC §8 Test Pyramid (already in context).
 4. **Template Match**: Scan `[Project Templates](templates/)` for boilerplate structural integration.
 5. **Module Delivery**: AI implements M1 behind **Feature Flags** + Non-destructive DB Migrations.
 6. **Quantitative Gate Check** (per module):
@@ -249,59 +335,9 @@ A module cannot pass the gate unless it meets hard numerical limits:
 8. **World-Building & Seeding Protocol**: The project is FAILED if it lacks realistic seed data. AI MUST generate a rigorous DB seed script (e.g., `prisma/seed.ts`) with high-fidelity, statistically realistic business data (e.g., 5 farms, 1000 bell-curved IoT telemetry logs, 3 triggered alerts). Execute `npm run seed`.
 9. **Handoff (Role-Play QA Gate)**: Docker + CI/CD Pipelines + Load Tests (k6) + Swagger + Playwright + Docs + Feature Flag config + **Rollback Runbook** + **Alert Playbook**. AI MUST deliver a `.github/workflows/ci.yml` (or equivalent) automating linting, type-checking, tests, and Docker builds. AI MUST also perform a Mock Walkthrough, listing default test accounts/passwords and the exact sequence of clicks to demonstrate the core business flow.
 10. **Retrospective Gate**: AI MUST output `PROJECT_RETRO.md` containing:
-    - Quality Gate Actuals vs Targets: `{ gate, target, actual, status: PASS|FAIL }` for Lighthouse, API p95, coverage.
-    - Technical Debt Register: list of all `[DEFERRED]` items (from Scale Tier decisions), each with a priority (P1/P2/P3) and recommended resolution sprint.
-    - SLO Achievement Summary: actual measured values vs the derived SLOs from Step 1.
-    - Lessons Learned: 3 structured machine-readable entries (feeds ADBM/DDFM Evolution Triggers):
-      `{ "rule_ref": "ADBM-§6", "difficulty": "HIGH|MED|LOW", "observed_issue": "...", "improvement_suggestion": "..." }`
+    `[Gate Metrics: PASS/FAIL]`, `[Tech Debt: Enum with Fix Sprints]`, `[Lessons: 3 structured entries]`.
 
-## 🗂️ Ecosystem Routing Protocol (Core Assets)
-The following resources MUST be accessed via `view_file` or executed during generation:
-- **[Governance Templates](governance/)**: Standardization for ADRs and Rollback Runbooks.
-- **[Utility Scripts](scripts/)**: CI/CD and FinOps execution tools.
-- **[Project Templates](templates/)**: Boilerplates for monolithic and microservice architectures.
-- **[Domain Knowledge](knowledge/)**: Contextual insights for specific domains.
-- **[Manifests](docs/)**: Commander documentation.
+## 🛡️ Admin Protocols (Ecosystem, Health, Evolution)
+1. **Routing & Health**: Use `templates/` for boilerplate, `scripts/` for FinOps, `knowledge/` for domain insight. Apply inline rules if absent.
+2. **Evolution**: If a workflow gap appears, a gate fails 3x, or tools >18mo old, generate `skill-amendment-proposal.md`.
 
-> **FSPC: End-to-end orchestration fueled by quantitative quality, dark launches, zero-downtime mentality, precise rollback planning, and strict sovereignty.**
-
----
-
-## 🩺 Skill Health Check Protocol
-
-At activation, AI MUST verify the following asset paths exist. If missing, emit `⚠️ [FSPC Asset Missing]: {path}` and apply inline fallback.
-
-| Asset | Path | Fallback Behavior |
-|---|---|---|
-| Governance Templates | `governance/` | Generate ADR/Runbook inline using FSPC rules |
-| Utility Scripts / FinOps | `scripts/` | Estimate costs manually from public cloud pricing pages |
-| Project Templates | `templates/` | Scaffold from scratch using ADBM + DDFM patterns |
-| Domain Knowledge | `knowledge/` | Apply general best practices from ADBM/DDFM |
-
-## 🔄 Evolution Triggers
-
-When any condition below occurs, AI MUST generate `skill-amendment-proposal.md`:
-
-| Trigger | Condition | Action |
-|---|---|---|
-| Workflow gap | Delivery scenario not covered by PRE-FLIGHT + EXECUTION | Propose new checklist item |
-| Gate failure pattern | Same Quality Gate fails 3+ consecutive projects | Adjust threshold or add prep step |
-| Sub-skill drift | ADBM/DDFM major version introduces incompatible rules | Update §0 Step C and Inheritance Confirmation |
-| Retrospective pattern | Same `rule_ref` in Lessons Learned across 3+ projects | Escalate to ADBM/DDFM Evolution Trigger |
-| **Time-Based Decay** | Any referenced framework/tool version is > 18 months old relative to the current date | AI SHOULD flag the rule as `[STALE]` and generate `skill-amendment-proposal.md` proposing a review sprint |
-
-## 📋 Changelog
-
-| Version | Date | Summary |
-|---|---|---|
-| v3.5 | 2026-02-28 | Added: Anti-Vanity Metrics, Graceful Exit (Offline-First), and Keyboard Sovereignty (Superhuman Paradigm) |
-| v3.4 | 2026-02-28 | Added: DIL (Design Intensity Level), Soul Diagnostics, and Ecological/Ethical Exit Strategies to PRE-FLIGHT. |
-| v3.3 | 2026-02-28 | Added: MVP Commercial Loop Gate, Product Empathy Engine, Anti-Toy-App Protocol |
-| v3.2 | 2026-02-28 | Added: Architecture Brief Gate (PRE-FLIGHT), Kickoff Card format in Inheritance Confirmation |
-| v3.1 | 2026-02-28 | Added: Dynamic Capability Discovery directive, Time-Based Decay in Evolution Triggers |
-| v3.0 | 2026-02-28 | Added: Sovereign Pivot Intelligence (§7), Monetization Strategy Gate (PRE-FLIGHT), A11y Deep-Scan layer in Test Pyramid (§8) |
-| v2.3 | 2026-02-28 | Added: strategic_advisory.md activation (§0 Step C), Scale Tier → Strategic Persona mapping, business-intelligence.md PRE-FLIGHT trigger |
-| v2.2 | 2026-02-28 | Added: SOC2 Type II, SKILL_PRIORITY.md Activation, Test Pyramid, User Sign-Off Timeout, Quantified Load Test Scenes |
-| v2.1 | 2026-02-28 | Added: Quantified Virtual Board Arch PASS, Inheritance Confirmation (§0 Step C), FinOps Cost Template (§3), Role×Permission Matrix (PRE-FLIGHT), SLO Input Traceability, Structured Retrospective Lessons Learned, Evolution Triggers |
-| v2.0 | 2026-02-28 | Added: Intent Disambiguation Layer, Sub-Skill Activation Fix, Compliance Tiers, Tenant Isolation Matrix, Feature Flag State Machine, Dynamic SLO Derivation, Retrospective Gate, Skill Health Check |
-| v1.0 | 2025-Q4 | Initial FSPC release with 11 core protocols |

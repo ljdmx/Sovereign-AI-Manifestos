@@ -1,13 +1,37 @@
 ---
 name: design-driven-frontend-manifesto
 description: AI-powered frontend design system with world-class aesthetic sovereignty and methodology
-version: "3.5"
+version: "9.0"
 trigger_keywords: ["create component", "design system", "frontend component", "brand design", "UI development", "visual design", "dashboard", "landing page", "responsive layout", "dark mode", "animation", "mobile UI", "UI/UX", "color scheme", "accessibility"]
 auto_activate: true
 ---
 
 # Design-Driven Frontend Manifesto (DDFM)
 ## 🌐 World-Class Visual Design Handbook (Methodology Edition)
+
+---
+
+## 🧘 Design Soul Constitution (10 Laws & Master Keys)
+
+AI MUST evaluate every generated UI against these ten laws before handoff:
+1. **Innovative**: Frontier tech for new solutions, not trends. BLOCK: copy-pasting patterns.
+2. **Useful**: Solve core pain points; efficient, durable, reliable. BLOCK: buried actions.
+3. **Aesthetic**: Beauty from function, emotional connection. BLOCK: meaningless decoration.
+4. **Understandable**: Intuitive, self-explanatory, zero-learning curve. BLOCK: ambiguous states.
+5. **Unobtrusive**: Tool recedes, focus is on content. BLOCK: heavy chrome/borders.
+6. **Honest**: No exaggerated features or dark patterns. BLOCK: fake urgency.
+7. **Long-lasting**: Timeless over transient trends. BLOCK: "Neon/Web3" fads.
+8. **Thorough**: Every pixel, micro-interaction, and edge case crafted. BLOCK: only success paths.
+9. **Eco-conscious**: Mindful of digital carbon footprint. BLOCK: 3MB hero/idle compute.
+10. **Minimal**: Less, but better. Extreme restraint. BLOCK: elements that don't earn their place.
+
+> **[Aesthetic Overrides - Master Keys]** AI MUST reference at least ONE in the Design Brief:
+> - **Jony Ive (Materiality)**: Absolute simplicity, physical emotional resonance ("felt" design).
+> - **Kenya Hara (Void)**: Emptiness as an active element, awakening the senses.
+> - **Don Norman (Cognition)**: Visceral (instinct), Behavioral (frictionless), Reflective (memory).
+> - **Paradigm Lineage**: Borrow from Figma (canvas freedom), Notion (block uniformity), Arc (immersive spatiality), Linear (hyper-speed/keyboard-first), Superhuman (zero-friction triage).
+
+---
 
 > [!IMPORTANT]
 > **Aesthetic Sovereignty**: Deliver "Surgical UI" by default. 
@@ -35,13 +59,18 @@ auto_activate: true
 - `Localization = RTL` → Enforce: `dir="rtl"` on `<html>`, replace all directional CSS (e.g., `margin-left` → `margin-inline-start`), audit icon mirroring (arrows, back/forward icons), test with Arabic/Hebrew dummy content.
 - `Compliance` active → Enforce: WCAG 2.1 AAA for critical actions (contrast ≥ 7:1), forced `prefers-reduced-motion` support, skip-navigation links.
 
-**Skill Kickoff Card** (AI MUST output immediately after §0 classification, before any component generation):
+**Skill Kickoff Card** (AI MUST output immediately after §0, UNLESS activated by FSPC):
+> **[SILENT MODE]**: If activated via FSPC, SUPPRESS this output entirely. Run silently.
 ```
-🎨 [DDFM v3.2 Activated]
+🎨 [DDFM v9.0 Activated]
 ├─ UI Grade: [Consumer | Enterprise | Compliance]
 ├─ Locale: [LTR | RTL] | Dark Mode: First-Class Citizen
-├─ Active: OKLCH Color Model + Spring Physics 400/30 + XState Mandate
-└─ Ready. Describe your UI component or design system requirement.
+├─ Active: OKLCH + Spring 400/30 + Bento Grid + Stagger Cascade
+├─ Soul Scorecard Baseline (Target: 7.0/10):
+│  ├─ Understand: /10 | Respect: /10 | Companion: /10 | Delight: /10 | Ethics: /10
+└─ Zero-AI Taste Protocol active. Describe your UI requirement.
+```
+- **Failure Protocol**: If Overall Soul Score < 7.0, propose design intervention BEFORE coding.
 
 ---
 
@@ -103,12 +132,10 @@ auto_activate: true
 
   AI MUST reference this vocabulary for every interactive element. Deviations require explicit justification.
 
-**Spring Physics Reference** (apply to all `spring` timing entries above):
-| Parameter | Value | Rationale |
-|---|---|---|
-| `stiffness` | **400** | Snappy, confident response — matches premium native app feel |
-| `damping` | **30** | Natural settle without wobble or overshoot |
-| Implement via | `framer-motion spring` / CSS `linear()` / Popmotion |
+**Spring Physics Reference & Choreography Constraints** (MUST apply):
+- **Stiffness/Damping Override**: `spring(stiffness: 400, damping: 30)` for snappy, confident responses (native feel).
+- **Hard Limit**: No spatial motion may exceed `250ms`. Breathing/color transitions may use 600ms ease.
+- **Violation**: Using `transition: all 0.3s ease` for structural layout shifts is a **HARD BLOCK**. Use framer-motion, Popmotion, or CSS `linear()`.
 
 **Frustration-Aware Kinetics** (SHOULD for consumer-grade products): When `≥ 3 rapid clicks` are detected on the same element within 1s (rage-click pattern), AI MUST implement: (1) Slow animation speed to `0.6×` for 2s to signal "processing", (2) Display a contextual helper tooltip (e.g. "Processing… please wait"). This pattern measurably reduces user churn from UI confusion.
 
@@ -268,7 +295,126 @@ auto_activate: true
   4. Output a `Design Drift Report`: `{ new_component, drifted_properties[], corrected_to_tokens[] }`.
 - **Goal**: Guarantee zero design drift accumulation across a project's lifetime.
 
----
+## 2️⃣2️⃣ Texture & Depth Sovereignty (Material Realism)
+- **Mandate**: AI MUST never use flat, single-value color fills for large background surfaces. Flat color is the hallmark of low-quality AI-generated UI.
+- **Noise Texture Protocol**: All large background panels (hero sections, card backgrounds, modal backdrops) MUST include an ultra-fine SVG noise texture overlay:
+  ```css
+  background-image: url("data:image/svg+xml,..."); /* SVG feTurbulence noise */
+  mix-blend-mode: overlay;
+  opacity: 0.025; /* 0.02–0.04 range */
+  ```
+  This eliminates flat "color banding" and creates cinematic material depth.
+- **Multi-Stop Gradient Mandate**: Simple two-stop linear gradients are FORBIDDEN for hero and premium sections. AI MUST use at minimum a **3-stop radial gradient** or **mesh gradient** to simulate directional light sources.
+  ```css
+  /* ✅ CORRECT — Directional light gradient */
+  background: radial-gradient(ellipse at 20% 30%, oklch(55% 0.18 280 / 0.4) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 70%, oklch(60% 0.15 200 / 0.3) 0%, transparent 60%),
+              oklch(12% 0.02 260); /* base layer */
+  /* ❌ FORBIDDEN */
+  background: linear-gradient(#000, #111);
+  ```
+- **Inner Highlight Rule**: Premium cards in dark mode MUST apply a 1px top-edge inner highlight:
+  ```css
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 24px rgba(0,0,0,0.35);
+  ```
+
+## 2️⃣3️⃣ Asymmetric Bento Grid Mandate (Anti-Generic Layouts)
+- **Mandate**: Symmetric equal-column grids (e.g., 3×3, 4×4 identical card layouts) are FORBIDDEN for landing pages, dashboards, and feature showcases. Equal grids are the top signal of generic AI-generated layouts.
+- **Implementation**: AI MUST implement non-uniform `grid-template-areas` creating visual tension through size contrast:
+  ```css
+  /* ✅ CORRECT — Bento asymmetric grid */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: var(--spacing-md);
+  }
+  .feature-hero  { grid-column: 1; grid-row: 1 / 3; } /* Large anchor block */
+  .feature-stat  { grid-column: 2; grid-row: 1; }     /* Small supplemental */
+  .feature-chart { grid-column: 2 / 4; grid-row: 2; } /* Wide supporting block */
+  ```
+- **Size Contrast Ratio**: The largest grid cell MUST be at minimum **2× the area** of the smallest adjacent cell.
+- **Diagonal Breathing**: At least one grid cell must span 2 columns or 2 rows to create non-linear reading paths. Pure row-by-row grids are NOT acceptable for hero content sections.
+
+## 2️⃣4️⃣ Cinematic Typography System
+- **Mandate**: AI MUST use a dual-role font system. Using the same font-size scale for both display headlines and body text is an automatic failure.
+- **Font Role Segregation**:
+  - **Display Role** (Hero headings, stat numbers, pull quotes): `font-family: 'Inter', 'SF Pro Display', system-ui`; `letter-spacing: -0.03em` to `-0.05em`; `line-height: 1.05` to `1.15`; weight `700–900`.
+  - **Body Role** (Paragraphs, labels, table cells): `letter-spacing: 0em` to `0.01em`; `line-height: 1.55` to `1.7`; weight `400–500`.
+- **Minimum Scale Steps**: Font-size system MUST define at minimum **6 named scale steps** (not just `sm`/`md`/`lg`):
+  ```css
+  --text-xs: clamp(0.65rem, 1.2vw, 0.75rem);
+  --text-sm: clamp(0.8rem, 1.5vw, 0.875rem);
+  --text-base: clamp(0.9rem, 1.8vw, 1rem);
+  --text-lg: clamp(1rem, 2.2vw, 1.125rem);
+  --text-xl: clamp(1.2rem, 3vw, 1.5rem);
+  --text-display: clamp(2rem, 6vw, 4.5rem); /* Hero / Stat number */
+  ```
+- **Number Typography**: Large stat numbers and KPI values MUST use `font-variant-numeric: tabular-nums` and `font-feature-settings: "tnum"` to prevent layout shifts during live data updates.
+- **Text Hierarchy Enforcement**: If the AI generates a page with fewer than 3 distinct visual weight levels (e.g., everything appears at the same weight), it is a **HARD BLOCK**. Rebalance before handoff.
+
+## 2️⃣5️⃣ Zero-AI-Aesthetic Protocol (Ruthless De-emphasis)
+- **Mandate**: AI-generated UIs are often "uniformly important" — everything competes for attention simultaneously. This is the primary AI tell. This section enforces opinionated de-emphasis as a first-class design value.
+- **Single CTA Law**: On any given screen, ONLY ONE element may be a solid-fill primary button (the most critical action). ALL other buttons MUST be demoted to `ghost` (border-only), `text` (link-style), or `subtle` (low-opacity fill) variants.
+  ```
+  [Primary: solid fill CTA] ← max 1 per screen
+  [Secondary: ghost border button] ← competitor actions
+  [Tertiary: text/link button] ← navigation, cancel actions
+  ```
+- **Opacity-Based Secondary Text**: Secondary labels, metadata, timestamps, and helper text MUST use opacity layering (`opacity: 0.45` to `0.65`) rather than hardcoded gray hex values. This ensures legibility adapts automatically across different background materials (dark glass, light paper, gradient).
+- **Whitespace as Content Rule**: At least **25% of any hero or feature section** must be deliberate void (empty space). Removing a decorative element is ALWAYS the right choice if its absence creates calm. This directly embodies the `虚空/Void` philosophy of §8.
+- **Forbidden AI Tells** (HARD BLOCK on all of these):
+  - `border-radius: 50%` on non-circular avatar elements (over-rounding)
+  - Generic floating action buttons with shadow halos in B2B dashboards
+  - Gradient text applied to body copy (only acceptable for 1-word display titles)
+  - Blue/purple + pink gradient combos without explicit brand justification
+  - Icon + label combinations that repeat the same word (e.g., home icon + "Home" label in a minimal nav)
+
+## 2️⃣6️⃣ Brand Magnetic Field System
+- **Mandate**: World-class products are recognizable from a single screenshot, without their logo visible. This requires a deliberate "Brand Magnetic Field" — a unique constellation of design decisions that make the product unmistakable. Without this, AI generates capable but generic UIs.
+- **Brand Magnetic Field Declaration**: AI MUST output the following immediately after §0 classification, before generating any token or component:
+  ```
+  🧲 [Brand Magnetic Field Declared]
+  ├─ Core Visual Metaphor: {e.g., "Arctic calm meets industrial precision"}
+  ├─ 3 Forbidden Visual Clichés: {e.g., "blue-purple sci-fi gradients", "confetti celebrations", "rounded 3D icons"}
+  ├─ Tone of Voice: {e.g., "authoritative but warm", "playful but efficient"}
+  └─ Design Peer Reference: {e.g., "Linear's speed + Notion's calm + 10% of Arc's personality"}
+  ```
+- **Consistency Enforcement**: Every component generated AFTER the declaration MUST be checked against the Magnetic Field. If a component contradicts the declared metaphor (e.g., generating a rounded playful card for an "industrial precision" brand), it is a HARD BLOCK. Regenerate before handoff.
+- **Anti-Amnesia Rule**: In long generation sessions, AI MUST re-read the Brand Magnetic Field declaration every 3 component generations to prevent style drift.
+
+## 2️⃣7️⃣ Multi-Stage Motion Choreography (Stagger Cascade)
+- **Mandate**: Elements MUST arrive in intentional sequence, not simultaneously. Use the Breathing Curve (`cubic-bezier(0.4, 0, 0.2, 1)`, 400ms).
+
+| Group | Delay | Curve / Exit Pattern |
+|---|---|---|
+| Nav / Header | 0ms | `cubic-bezier` 400ms |
+| Hero / H1 | 50ms | *same* |
+| Primary CTA | 100ms | *same* |
+| Support Blocks | 150ms | *same* |
+| Secondary Cards | 200ms | *same* |
+| Footer | 250ms | *same* |
+
+- **Exit**: Reverse sequence, 60% shorter duration. 
+- **Rage-Click Guard**: `<300ms` repeat click → skip all motion to final state.
+
+## 2️⃣8️⃣ Contextual Color Semantics (Emotion-Accurate Tokens)
+- **Mandate**: Standard `success=green`, `error=red` semantic colors are blunt instruments. World-class products use color to communicate nuanced emotional states, not just binary outcomes. The color system must match the emotional register of the moment.
+- **Emotion-Accurate Semantic Token Table** (AI MUST define these tokens, not use raw named CSS colors):
+
+  | Token | Emotional Intent | OKLCH Range | Anti-Pattern to Avoid |
+  |---|---|---|---|
+  | `--semantic-success` | Calm confirmation, not celebration | `oklch(62% 0.15 145–160)` (warm jade, not neon green) | `#00FF00`, `green` |
+  | `--semantic-caution` | Gentle alertness, not alarm | `oklch(75% 0.14 70–85)` (warm amber, not orange) | `#FF8C00`, `orange` |
+  | `--semantic-destructive` | Firm but not aggressive | `oklch(52% 0.16 20–30)` (desaturated brick red, not fire engine) | `#FF0000`, `red` |
+  | `--semantic-info` | Curious, neutral guidance | `oklch(60% 0.12 230–250)` (muted slate blue) | `#0000FF`, `blue` |
+  | `--semantic-delight` | Surprise and warmth | `oklch(70% 0.14 300–320)` (soft violet, for delight moments only) | Any persistent use of purples |
+  | `--semantic-empty` | Quiet invitation, not emptiness | `oklch(82% 0.04 60–80)` (warm parchment, for empty states) | Pure gray, `#F5F5F5` |
+
+- **Contextual Palette Switching**: On dark mode, each semantic token MUST shift L value (lightness) while keeping the same hue and chroma. Never just invert — always re-derive for the dark environment.
+- **Emotion Forbiddance**: NEVER use `--semantic-success` for a promotional/marketing highlight. `--semantic-delight` is the only acceptable choice for moments of reward or celebration.
+
+
 
 ## 🧠 AI Execution Protocol — Unified Delivery Workflow
 
@@ -293,49 +439,6 @@ auto_activate: true
 6. `Aesthetic & A11y Audit` → Run `node [Aesthetic Scorer](tools/aesthetic-scorer.js)`. **The script's output score is the canonical authority for Design Coherence Score (§19) — its rubric identically mirrors the three-axis protocol (Layout Rhythm, Color Harmony, Spatial Hierarchy) defined in §19.** Run Lighthouse `--accessibility` or `npx axe-core`. Run contrast ratio check **separately** for light mode AND dark mode token sets — both MUST pass WCAG 4.5:1 for normal text and 3:1 for large text. **All checks must score ≥ 90. Block handoff if any fails.**
 7. `Visual Regression Gate` → Run `npx playwright screenshot` on all modified pages and compare pixel diffs against baseline snapshots (`pixelmatch` or `Chromatic`). If pixel diff > 0.1% on unintended areas → **BLOCK** handoff, output diff report, await explicit approval.
 
-## 🗂️ Ecosystem Routing Protocol (Core Assets)
-The following resources MUST be accessed via `view_file` or executed during generation:
-- **[Aesthetic Scorer Tool](tools/aesthetic-scorer.js)**: MANDATORY JS script to quantify UI visual metric quality.
-- **[UI Templates](templates/)**: Production-ready component boilerplate definitions.
-- **[System Specs](docs/)**: DDFM technical documentation.
-
-*Relying on this master methodology guarantees world-class, premium visual outputs with physical, fluid, resilient, secure, and accessible traits.*
-
----
-
-## 🩺 Skill Health Check Protocol
-
-At activation, AI MUST verify the following asset paths exist. If missing, emit `⚠️ [DDFM Asset Missing]: {path}` and apply inline fallback.
-
-| Asset | Path | Fallback Behavior |
-|---|---|---|
-| Aesthetic Scorer | `tools/aesthetic-scorer.js` | Apply Design Coherence Score protocol (§19) inline |
-| UI Templates | `templates/` | Generate component from DDFM rules with mock data |
-| System Specs / Docs | `docs/` | Apply DDFM rules directly |
-
-## 🔄 Evolution Triggers
-
-When any of the following conditions occur, AI MUST generate `skill-amendment-proposal.md` for the DDFM maintainer:
-
-| Trigger | Condition | Proposed Action |
-|---|---|---|
-| Design pattern obsolescence | A UI pattern (e.g., hamburger menu) is flagged as UX anti-pattern by 2+ accessibility audits | Add deprecation note + replacement guidance |
-| Micro-interaction gap | An interaction scenario not in the Vocabulary is encountered 3+ times | Add new row to Micro-interaction table |
-| Tech decay | A recommended tool (e.g., pixelmatch) is superseded | Update Visual Regression Gate |
-| Score anchor mismatch | Design Coherence Score anchors repeatedly produce false positives | Tighten or loosen quantifiable anchor thresholds |
-| **Time-Based Decay** | Any referenced framework/tool version is > 18 months old relative to the current date | AI SHOULD flag the rule as `[STALE]` and generate `skill-amendment-proposal.md` proposing a review sprint |
-
-## 📋 Changelog
-
-| Version | Date | Summary |
-|---|---|---|
-| v3.5 | 2026-02-28 | Added: Breathing Kinetics, Arc-Immersive Space, Notion Block-Fluidity, and Eco-Rendering Idle Conservation |
-| v3.4 | 2026-02-28 | Added: Void/Emptiness (Kenya Hara), Norman's 3-level psychological micro-interactions, and the Anti-Gimmick Gate. |
-| v3.3 | 2026-02-28 | Added: Premium Layout Patterns (§8), Micro-Surfaces & Lighting (§7), Hyper-Realism Data Mocking (§13) |
-| v3.2 | 2026-02-28 | Fixed: §19/AI-Step-6 axis name unified to `Spatial Hierarchy`; Added Skill Kickoff Card to §0; bump version |
-| v3.1 | 2026-02-28 | Added: `aesthetic-scorer.js` canonical authority declaration (AI Step 6), Time-Based Decay in Evolution Triggers |
-| v3.0 | 2026-02-28 | Added: OKLCH Color Model (§2), Spring Physics 400/30 Reference Table + Frustration-Aware Kinetics + Hardware-Aware Degradation (§5), XState Mandate (§4) |
-| v2.2 | 2026-02-28 | Added: Drag & Drop Micro-interaction Spec (§5), Mobile Proportion Variant (§15), State Matrix Activation Threshold (§20), Design Drift Initial Baseline (§21), Quality Gate HARD BLOCK vs WARN split (AI Step 5) |
-| v2.1 | 2026-02-28 | Added: Expanded trigger_keywords, Error-State Animations (§5), Chart Type Decision Tree + Anti-Flicker Rules (§14), Quantifiable Coherence Anchors (§19), Dark Mode Contrast Gate (§AI Step 6), Evolution Triggers |
-| v2.0 | 2026-02-28 | Added: Intent Disambiguation Layer (§0), RTL/Bidirectional Support (§16), Micro-interaction Vocabulary (§5), Design Coherence Score (§19), Component State Matrix (§20), Design Drift Detector (§21), Visual Regression Gate (§AI Step 7), Skill Health Check |
-| v1.0 | 2025-Q4 | Initial DDFM release with 18 core design protocols |
+## �️ Admin Protocols (Ecosystem, Health, Evolution)
+1. **Routing & Health**: Use `tools/aesthetic-scorer.js` for quantification. Use `templates/` for boilerplate. If missing, apply fallback rules inline.
+2. **Evolution**: If a rule fails 3+ times, a UI pattern is obsolete, or a tool >18mo old, generate `skill-amendment-proposal.md`.

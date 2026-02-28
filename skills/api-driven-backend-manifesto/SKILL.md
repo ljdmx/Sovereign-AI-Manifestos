@@ -1,7 +1,7 @@
 ---
 name: api-driven-backend-manifesto
 description: The definitive framework for AI-powered, architecturally sovereign backend systems. ADBM elevates API design from a technical task to a strategic imperative.
-version: "3.4"
+version: "8.0"
 multi-language: ["English"]
 trigger_keywords: ["create API", "backend service", "database design", "microservice", "REST API", "GraphQL", "API architecture", "backend architecture", "authentication", "authorization", "caching", "deployment", "CI/CD", "observability", "rate limiting", "webhooks", "event-driven", "queue", "build backend", "server-side", "Node.js", "NestJS", "FastAPI", "Express", "Django", "Spring Boot", "Prisma"]
 auto_activate: true
@@ -44,12 +44,13 @@ auto_activate: true
 - **Confirmation Timeout**: If no user response within 2 minutes, AI MUST default to the most conservative classification (`Security = Critical, Scale = Growth`) and proceed, notifying the user of the assumption.
 - **Mid-Session Reclassification**: If the user reveals new context mid-conversation (e.g., "This will handle medical records"), AI MUST immediately re-run the Classification step, update the active rule set, and output a **Reclassification Notice** before continuing.
 
-**Skill Kickoff Card** (AI MUST output immediately after classification confirmation, before any code generation):
+**Skill Kickoff Card** (AI MUST output immediately after classification confirmation, UNLESS activated by FSPC):
+> **[SILENT MODE]**: If activated via FSPC, SUPPRESS this output entirely. Run silently.
 ```
-🛡️ [ADBM v3.1 Activated]
+🛡️ [ADBM v8.0 Activated]
 ├─ Classification: [Scale: X | Security: Y | Complexity: Z]
-├─ Active Rules: §1–§14 full | [DEFERRED]: {list or ‘none’}
-├─ Runtime: {Node.js | Python | Go | ...} detected
+├─ Active Rules: §1–§26 full | [DEFERRED]: {list or ‘none’}
+├─ Runtime: {Node.js | Python | Go}
 └─ Ready. Describe your backend requirements.
 ```
 
@@ -65,8 +66,8 @@ auto_activate: true
 
 ---
 
-## 1️⃣ API Versioning Contract & Rate Limiting
-- **Mandate**: API endpoints MUST NOT break existing consumers, AND must protect themselves from abuse.
+## 1️⃣ API Versioning Contract & Rate Limiting (Rams Law 2: Useful/Reliable)
+- **Mandate**: API endpoints MUST NOT break existing consumers, ensuring durability and reliability.
 - **Versioning**: All public APIs MUST enforce versioning via URI (`/api/v1/...`) or Header (`Accept: vnd.api+json;version=1`). Deprecations require a `Deprecation` Header for 2 minor versions.
 - **Backend Feature Flags**: New core business endpoints during initial rollout MUST be safeguarded by API-level Feature Flag routing (e.g., `X-Feature-Flag: new-billing-engine`) to prevent dual-write conflicts and allow safe dark launching.
 - **Rate Limiting**: ALL public routes MUST be protected by a Token Bucket or Leaky Bucket algorithm (usually via Redis). Return `429 Too Many Requests` when thresholds are breached.
@@ -80,8 +81,8 @@ auto_activate: true
   | Reporting / Export (heavy) | Per-User Leaky Bucket | 10 req | 1 hour |
   | Webhooks / Public Ingestion | Per-Source IP | 500 req | 1 min |
 
-## 2️⃣ Empathetic Error Contract (RFC 7807+)
-- **Mandate**: API responses MUST never leak internal stack traces or use cold, robotic language.
+## 2️⃣ Empathetic Error Contract (RFC 7807+) (Rams Law 6: Honest)
+- **Mandate**: API responses MUST never leak internal stack traces, nor should they use dark patterns or robotic, deceptive language. Mistakes must be admitted honestly.
 - **Implementation**: Adopt **RFC 7807 (Problem Details for HTTP APIs)** globally, but inject empathy.
 - **Structure**: Every HTTP 4XX and 5XX response MUST return: `type`, `title`, `status`, `detail`, and `instance`.
 - **Empathy Injection**: Responses MUST additionally include `human_readable_cause` (explaining the "Why" gently) and `suggested_action` (providing the user's immediate next step, empowering them instead of confusing them).
@@ -210,24 +211,108 @@ auto_activate: true
 - **Mandate**: A clean database is a calm database. Digital hoarding is a toxic anti-pattern.
 - **Execution**: Implement strict Database TTLs. Any intermediate state, error log, draft, or unused asset MUST have an automatic TTL (e.g., 7 days) to dissolve back into nothingness. The schema must enforce ephemeral data hygiene at the SQL layer.
 
+## 2️⃣1️⃣ View-Model Transformation Layer (UI-Driven BFF)
+- **Mandate**: The primary role of a backend is NOT to expose raw DB row arrays to the frontend. Serving raw relational data and expecting the frontend to compute charts, aggregates, and stat cards causes main-thread blockage, visible jank, and ruined UX.
+- **Implementation**: For every dashboard panel, chart, or KPI stat card identified in the PRD or UI wireframe, AI MUST generate a dedicated, aggregated **View-Model endpoint** alongside the base CRUD API:
+  ```typescript
+  // ❌ GET /api/v1/telemetry (returns 10k raw rows) → 🛑 BLOCK
+  // ✅ GET /api/v1/metrics/trend-chart (returns pre-aggregated series) 
+  ```
+- **Naming Convention**: View-Model endpoints MUST live under `/metrics/`, `/analytics/`, or `/summaries/` namespaces to distinguish them from standard CRUD endpoints.
+- **Caching Mandate**: All View-Model endpoints MUST be cached in Redis with a sensible TTL (`60s` for real-time dashboards, `1h` for daily reports). Cache invalidation MUST be triggered by the corresponding mutation events (not just TTL expiry).
+- **Anti-Pattern Enforcement**: Any frontend component that iterates a large array (> 100 items) purely for aggregation purposes (`.reduce()`, `.filter().length`, `_.groupBy()`) is a HARD BLOCK signal — refactor into a server-side View-Model endpoint instead.
+
+## 2️⃣2️⃣ Cinematic Database Seeding (Production Demo Fidelity)
+- **Mandate**: A database seeded with `User 1`, `Product 2`, `Test Title` is a failed product. The seed data is the product's first impression. It MUST be indistinguishable from real production data at first glance.
+- **Hyper-Realistic Data Constraints**:
+  1. **Names & Identities**: Use culturally diverse, real-sounding full names (not `John Doe`). Avatars MUST use specific, high-quality Unsplash photo IDs (e.g., `https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop`) — never use generated avatars or placeholder squares.
+  2. **Content & Copy**: Article titles, product descriptions, and notification messages MUST be domain-accurate. For a SaaS product: use realistic feature names, changelog entries, and user feedback. For IoT: use real device model names, realistic sensor readings within plausible ranges (e.g., temperature: `18.5°C–27.3°C`).
+  3. **Data Volume & Distribution**: Seed data MUST represent a realistic usage curve (e.g., 20% power users with 500+ items, 60% average users with 10–50 items, 20% new users with < 5 items). A flat distribution is not realistic.
+  4. **Timestamps**: MUST be backfilled realistically (e.g., `created_at` values distributed over the past 6 months, not all within 1 second).
+- **Execution**: The `seed.ts` / `seed.py` script MUST be runnable via `npm run seed` / `python seed.py` in ONE command from a fresh clone, with no manual configuration required.
+
+## 2️⃣3️⃣ First-Class Object Storage Mandate (S3/R2 Presigned URLs)
+- **Mandate**: Any feature involving user-uploaded files (avatars, cover images, documents, media) MUST use a cloud object storage provider (AWS S3, Cloudflare R2, or equivalent) via Presigned URLs. Storing binary file data in the primary database or on the application server filesystem is a **HARD BLOCK**.
+- **Presigned URL Upload Flow** (MUST implement exactly):
+  ```
+  1. Client POSTs {filename, size, type} → 2. Server validates & returns S3 PUT url & upload_id → 3. Client PUTs to S3 directly → 4. Client POSTs confirm {upload_id} → 5. Server saves CDN URL.
+  ```
+- **Security Requirements**: The presigned URL endpoint MUST require authentication. The `content_type` MUST be strictly validated against an allowlist (`image/jpeg`, `image/png`, `image/webp`, etc.). File `size_bytes` MUST be validated server-side before presign generation — client-side claims are not trusted.
+- **CDN Delivery**: All public assets MUST be served via a CDN (CloudFront, Cloudflare) — never via a direct S3 bucket URL. The `public_cdn_url` stored in the DB is always the CDN URL.
+- **Fallback Rule (Startup Tier)**: If the project is classified as `Scale = Startup` with no cloud budget, AI MUST use `Cloudflare R2` as default (generous free tier, S3-compatible API). Do NOT use local filesystem storage as a temporary shortcut.
+
+## 2️⃣4️⃣ OpenAPI Spec-First Protocol (“Contract Before Controller”)
+- **Mandate**: Writing controller code before defining the API contract is architectural malpractice. The OpenAPI 3.1 specification is the single source of truth — all code is derived from it, not the reverse.
+- **Execution Order** (MUST follow exactly):
+  ```
+  Step A → Generate `.openapi/api.yaml` (OpenAPI 3.1) for ALL endpoints
+  Step B → Run `npx @stoplight/spectral-cli lint .openapi/api.yaml` — HARD BLOCK on errors
+  Step C → Generate server-side type definitions from spec (`openapi-typescript` / `fastapi-codegen`)
+  Step D → Write controller code, referencing ONLY the generated types — no freehand type declarations
+  Step E → Validate running implementation: `dredd .openapi/api.yaml http://localhost:3000`
+  ```
+- **Spec Quality Rules**: The `.openapi/api.yaml` MUST define, for every endpoint: `operationId`, all possible response schemas (including `4XX` and `5XX`), `security` requirements, and at least 1 `example` per request/response body.
+- **Reverse Engineering Prohibition**: If a project is inherited with existing controllers but no spec, AI MUST generate the spec FIRST by reading the codebase (`reverse-spec`), validate it, and make the spec authoritative BEFORE touching any controller logic.
+- **Breaking Change Lock**: Once the spec is published (tagged in git), any change that would alter an existing `operationId`'s request or response schema triggers the ADBM §13 Breaking Change Detector Protocol.
+
+## 2️⃣5️⃣ Panic-Recovery Paradigm (Bulletproof Process)
+- **Mandate**: The Node/Python/Go process MUST NEVER crash or `exit(1)` due to an unhandled exception in a route handler, async worker, or third-party API timeout.
+- **Execution**: AI MUST wrap the entire top-level application router, all queue workers, and event subscribers in a universal `Catch-All / Panic-Recovery` middleware.
+- **Reporting**: When a panic is caught, it MUST return a 500 RFC 7807 error to the user (with `human_readable_cause: "Our servers experienced a temporary structural anomaly..."`), log the stack trace to structured JSON, and trigger an alert hook. The process MUST stay alive.
+
+## 2️⃣6️⃣ Technical Debt Quantification Protocol
+- **Mandate**: `[DEFERRED]` architectural items as internal engineering notes are invisible to business stakeholders and create silent risk accumulation. Every deferred item MUST be expressed in business-language cost terms, making the trade-off decision explicit.
+- **Updated `[DEFERRED]` Format** (MUST use this format, no exceptions):
+  ```
+  [DEFERRED: {component}]
+  ├─ What: {brief technical description}
+  ├─ Trigger: {measurable condition when this becomes urgent, e.g., "MAU > 10K" or "DB read QPS > 500"}
+  ├─ Business Risk: {consequence in user-facing terms, e.g., "p95 API latency exceeds 500ms, degrading checkout conversion"}
+  ├─ Resolution Cost: ~{N} engineering sprints
+  └─ Priority: P{1|2|3}
+  ```
+- **Debt Register Integration**: All `[DEFERRED]` items MUST be auto-collected into a `docs/TECH_DEBT.md` registry at session end. This register is a first-class project artifact delivered alongside code.
+- **Debt Aging Rule**: Any `[DEFERRED]` item that has been in the registry for > 3 project milestones without being resolved MUST be automatically escalated from P3 → P2 → P1. Stale debt is compounding debt.
+
+## 2️⃣6️⃣ Multi-Tenant Migration Ladder
+- **Mandate**: Most products start small (Shared Schema) and grow. Without a pre-planned migration path, tenant isolation upgrades become traumatic, data-loss-risking events that kill teams and products. This section defines the safe upgrade ladder.
+- **Migration Path: Shared Schema RLS → Separate Schema**:
+  ```
+  Phase 1 — Dual-Write Window (Zero Downtime):
+    1. Create new tenant-specific schema: CREATE SCHEMA tenant_{id}
+    2. Enable dual-write: write to both shared + new schema simultaneously
+    3. Backfill historical data from shared schema to new schema
+    4. Verify data integrity: row count + checksum validation
+
+  Phase 2 — Read Migration:
+    5. Route read traffic to new schema for target tenant
+    6. Monitor for 48h with fallback to shared schema on error
+
+  Phase 3 — Cutover:
+    7. Disable dual-write; new schema is primary
+    8. Create archival copy of shared schema rows; mark deleted (soft-delete)
+    9. Remove RLS policy for migrated tenant from shared schema
+  ```
+- **Migration Path: Separate Schema → Separate Database**:
+  - Follow the same 3-phase pattern, replacing schema boundaries with full DB instance boundaries.
+  - MUST use a message queue (BullMQ/Celery) to orchestrate the multi-step process as durable async jobs — never as a one-shot script that can fail mid-way.
+- **Rollback Clause**: Every migration phase MUST define an explicit rollback condition and rollback procedure BEFORE execution begins. No migration proceeds without a tested rollback plan.
+- **Pre-Migration Checklist**: AI MUST output this checklist before any tenant migration execution:
+  ```
+  ☐ Backup verified: {timestamp}
+  ☐ Migration tested on staging with production data copy
+  ☐ Rollback procedure documented and tested
+  ☐ Customer notified (if migration requires maintenance window)
+  ☐ On-call engineer designated for 4h post-migration monitoring window
+  ```
+
 ---
 
 ## 🌐 Runtime Routing Matrix
-
-AI MUST detect runtime from `package.json`, `requirements.txt`, or `go.mod` and apply the corresponding column **exclusively**. Do NOT mix stacks.
-
-| Layer | Node.js / TypeScript | Python | Go |
-|---|---|---|---|
-| **ORM** | Prisma v6+ | SQLAlchemy (Async) + Alembic | GORM / sqlc |
-| **Queue** | BullMQ + Redis | Celery + Redis | Asynq + Redis |
-| **Auth** | Passport.js / NextAuth | python-jose + FastAPI Security | golang-jwt |
-| **Cache** | ioredis | redis-py | go-redis |
-| **Validation** | Zod | Pydantic v2 | go-playground/validator |
-| **HTTP** | Express / Fastify / NestJS | FastAPI / Django REST | Gin / Echo / Fiber |
-
-> **Other runtimes (Rust, Java/Kotlin, Ruby, PHP)**: Apply ADBM principles universally. For Rust: `actix-web + sqlx + Tokio`. For Java/Kotlin: `Spring Boot + Hibernate/jOOQ + SLF4J + Micrometer`. Consult the language ecosystem's de-facto standards for queue, cache, and auth libraries—the architectural principles (idempotency, RFC 7807, DLQ, CQRS) are runtime-agnostic.
-
----
+AI MUST select stack based on detected runtime:
+- **Node.js**: Prisma/Drizzle, BullMQ, NextAuth/Passport, ioredis, Zod, Fastify/NestJS.
+- **Python**: SQLAlchemy(Async), Celery, python-jose, redis-py, Pydantic v2, FastAPI.
+- **Go**: GORM/sqlc, Asynq, golang-jwt, go-redis, validator, Echo/Fiber.
 
 ## 🤖 AI Execution Protocol
 Apply when user requests: API/backend creation, enterprise architecture, database design.
@@ -245,65 +330,9 @@ Apply when user requests: API/backend creation, enterprise architecture, databas
 7. **Telemetry & Contracts**: Setup JSON Logging, Trace IDs, Prometheus metrics, and Contract Testing definitions.
 8. **Red Team Audit**: Run static dependency supply chain analysis (`npm audit --json` or `pip-audit`), block on High/Critical CVEs. Read and execute scripts in `[Red Team Tools](red_team/)` before handoff.
 
-**⚡ FAILURE DECISION TREE** (apply when any step fails):
+**⚡ FAILURE DECISION TREE**:
+- Step 1-3 fail → retry×2 → human. Step 4-5 fail → isolate+retry×2. Step 6 fail → disable cache. Step 7 fail → WARN+continue. Step 8 fail → HARD BLOCK.
 
-| Failing Step | Category | Required Action |
-|---|---|---|
-| Step 1–3 (Schema/Blueprint) | Retryable | Re-check ORM version compat → Max 2 retries → Human escalation |
-| Step 4–5 (Controller/Service) | Retryable | Isolate module, verify RFC 7807 contract → Max 2 retries |
-| Step 6 (Cache Layer) | Retryable | Verify Redis conn → Fallback: disable cache, serve DB with rate limit |
-| Step 7 (Telemetry) | Non-blocking | Log `WARN`, continue delivery. Observability never blocks shipment. |
-| Step 8 (Red Team Audit) | **HARD BLOCK** | **DO NOT SHIP.** Output CVE list. Await patch or explicit human override. |
-| Any Architectural Error | **HARD STOP** | Stop ALL retries. Output Root Cause Analysis. Escalate to human. |
-
-## 🗂️ Ecosystem Routing Protocol (Core Assets)
-The following resources MUST be accessed via `view_file` or executed during generation:
-- **[Architecture Blueprints](blueprints/)**: Foundational templates for services.
-- **[Red Team Audit](red_team/security_audit.ts)**: Security validation scripts.
-- **[Implementation Templates](templates/)**: Standardized modules.
-- **[Utility Scripts](scripts/)**: Helper scripts for DB management.
-- **[Internal Documentation](docs/)**: ADBM deep-dive manuals.
-- **[Divine Interface](divine_interface.md)**: Metadata configuration.
-
-> **ADBM: Production-grade backends by default. Built for resilience, optimized for high concurrency, protected against system failures.**
-
----
-
-## 🩺 Skill Health Check Protocol
-
-At activation, AI MUST verify the following asset paths exist. If missing, emit `⚠️ [ADBM Asset Missing]: {path}` and apply inline fallback.
-
-| Asset | Path | Fallback Behavior |
-|---|---|---|
-| Architecture Blueprints | `blueprints/` | Generate from scratch using DDD rules |
-| Red Team Audit Script | `red_team/security_audit.ts` | Run `npm audit --json` inline |
-| Implementation Templates | `templates/` | Apply RFC 7807 + Prisma inline patterns |
-| Internal Docs | `docs/` | Apply ADBM rules directly |
-
-## 🔄 Evolution Triggers
-
-When any of the following conditions occur, AI MUST generate `skill-amendment-proposal.md` for the ADBM maintainer:
-
-| Trigger | Condition | Proposed Action |
-|---|---|---|
-| Rule overload | A rule is marked `HIGH difficulty` in Retrospective Gate 3+ consecutive projects | Relax threshold or add exception clause |
-| Coverage gap | AI encounters a backend scenario not covered by §0–§14 | Propose new section with `[PROPOSED]` tag |
-| Tech decay | A recommended library has a major deprecation or security EOL | Update Runtime Routing Matrix |
-| Security miss | Red Team Audit finds a CVE class not addressed by §9 | Add new security sub-rule immediately |
-| Conflict ambiguity | Two rules produce contradictory output for same project | Add to Conflict Arbitration table |
-| **Time-Based Decay** | Any referenced framework/tool version is > 18 months old relative to the current date | AI SHOULD flag the rule as `[STALE]` and generate `skill-amendment-proposal.md` proposing a review sprint |
-
-## 📋 Changelog
-
-| Version | Date | Summary |
-|---|---|---|
-| v3.4 | 2026-02-28 | Added: Local-First Privacy (Rewind), Zero-Friction Sync (Linear), and Right to be Forgotten TTL |
-| v3.3 | 2026-02-28 | Added: Empathetic Error Contract (RFC 7807+), Digital Carbon Footprint & Occam's Razor, Long-Lasting Clean Architecture |
-| v3.2 | 2026-02-28 | Added: LLM-Driven Application Protocol (§15) with Streaming, Async Offload, Billing/Quota Routing, and Abuse Firewall |
-| v3.1 | 2026-02-28 | Added: Skill Kickoff Card (§0), divine_interface.md multimodal pre-check in AI Execution Protocol |
-| v3.0 | 2026-02-28 | Added: Expanded trigger_keywords to 27 (framework-specific terms), Time-Based Decay in Evolution Triggers |
-| v2.3 | 2026-02-28 | Added: Edge-First Sovereignty (§9), Service Mesh & mTLS (§9) — merged from MANIFEST.md into active ruleset |
-| v2.2 | 2026-02-28 | Added: Expanded trigger_keywords (18 kw), RFC 2119 Rule Compliance Level table, Classification Timeout + Mid-Session Reclassification (§0), Saga ID Traceability (§6), Device Fingerprint Binding (§9), Consumer Contract Version Locking (§11) |
-| v2.1 | 2026-02-28 | Added: Conflict Arbitration + Classification Confirmation (§0), Differentiated Rate Limiting Tiers (§1), Idempotency Key TTL/Cleanup (§3), Mermaid Aggregate Root Format (§5), Prometheus Alerting Rules Codegen (§8), Other-Runtime Note, Evolution Triggers |
-| v2.0 | 2026-02-28 | Added: Intent Disambiguation Layer (§0), Scale/Security/Complexity Tiers, Runtime Routing Matrix, Breaking Change Detector (§13), DLQ Governance & Replay (§14), Failure Decision Tree, Skill Health Check |
-| v1.0 | 2025-Q4 | Initial ADBM release with 12 core protocols |
+## 🛡️ Admin Protocols (Ecosystem, Health, Evolution)
+1. **Routing & Health**: Ensure `blueprints/` and `red_team/security_audit.ts` exist. If absent, fallback to DDD rules inline.
+2. **Evolution**: If a rule causes repeated Retrospective failure or tools >18mo old, generate `skill-amendment-proposal.md`.
